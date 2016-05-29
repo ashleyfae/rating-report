@@ -32,7 +32,7 @@ function rating_report_metaboxes( array $meta_boxes ) {
 		'fields'     => array(
 			//Plot
 			array(
-				'name'    => $section[section_1],
+				'name'    => $section['section_2'],
 				'id'      => $prefix . 'section_1',
 				'type'    => 'select',
 				'options' => array(
@@ -51,7 +51,7 @@ function rating_report_metaboxes( array $meta_boxes ) {
 			),
 			//Characters
 			array(
-				'name'    => $section[section_2],
+				'name'    => $section['section_2'],
 				'id'      => $prefix . 'section_2',
 				'type'    => 'select',
 				'options' => array(
@@ -70,7 +70,7 @@ function rating_report_metaboxes( array $meta_boxes ) {
 			),
 			//Writing
 			array(
-				'name'    => $section[section_3],
+				'name'    => $section['section_3'],
 				'id'      => $prefix . 'section_3',
 				'type'    => 'select',
 				'options' => array(
@@ -89,7 +89,7 @@ function rating_report_metaboxes( array $meta_boxes ) {
 			),
 			//Pacing
 			array(
-				'name'    => $section[section_4],
+				'name'    => $section['section_4'],
 				'id'      => $prefix . 'section_4',
 				'type'    => 'select',
 				'options' => array(
@@ -109,7 +109,7 @@ function rating_report_metaboxes( array $meta_boxes ) {
 			
 			//Cover
 			array(
-				'name'    => $section[section_5],
+				'name'    => $section['section_5'],
 				'id'      => $prefix . 'section_5',
 				'type'    => 'select',
 				'options' => array(
@@ -146,5 +146,3 @@ function cmb_initialize_rating_report_metaboxes() {
 		require_once 'init.php';
 
 }
-
-?>

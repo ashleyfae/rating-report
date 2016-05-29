@@ -148,6 +148,4 @@ function add_rating_report_after_content($content) {
 		}
 	}
 }
-add_filter('the_content', add_rating_report_after_content);
-
-?>
+add_filter('the_content', 'add_rating_report_after_content');

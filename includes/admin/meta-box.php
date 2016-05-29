@@ -53,18 +53,20 @@ function rating_report_render_meta_box( $post ) {
  * @return void
  */
 function rating_report_render_rating_fields( $post ) {
-	$categories   = rating_report_get_option( 'categories', rating_report_get_default_categories() );
-	$rating_scale = rating_report_get_rating_scale();
+	$categories    = rating_report_get_option( 'categories', rating_report_get_default_categories() );
+	$rating_scale  = rating_report_get_rating_scale();
+	$saved_ratings = get_post_meta( $post->ID, 'rating_report', true );
+	$saved_ratings = is_array( $saved_ratings ) ? $saved_ratings : array();
 
 	foreach ( $categories as $key => $name ) {
 		$number      = ( $key + 1 );
-		$field_id    = '_ratingr_section_' . $number;
-		$saved_value = get_post_meta( $post->ID, $field_id, true );
+		$field_id    = 'rating_report_category_' . $number;
+		$saved_value = array_key_exists( $key, $saved_ratings ) ? $saved_ratings[ $key ] : '';
 		?>
 		<div class="rating-report-field-row">
 			<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $name ); ?></label>
 			<div class="rating-report-field">
-				<select id="<?php echo esc_attr( $field_id ); ?>" name="<?php echo esc_attr( $field_id ); ?>">
+				<select id="<?php echo esc_attr( $field_id ); ?>" name="rating_report[]">
 					<option value="" <?php selected( $saved_value, '' ); ?>><?php esc_html_e( '- Select -', 'rating-report' ); ?></option>
 					<?php foreach ( $rating_scale as $rating_value => $rating_name ) : ?>
 						<option value="<?php echo esc_attr( $rating_value ); ?>" <?php selected( $saved_value, $rating_value ); ?>><?php echo esc_html( $rating_name ); ?></option>
@@ -120,6 +122,8 @@ function rating_report_save_meta( $post_id, $post ) {
 		$number   = ( $key + 1 );
 		$fields[] = '_ratingr_section_' . $number;
 	}
+
+	$fields = array( 'rating_report' );
 
 	foreach ( apply_filters( 'rating-report/meta-box/saved-fields', $fields ) as $field ) {
 		if ( ! empty( $_POST[ $field ] ) ) {

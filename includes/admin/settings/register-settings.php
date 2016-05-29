@@ -227,7 +227,7 @@ function rating_report_get_registered_settings() {
 		/* Display Settings */
 		'display'    => apply_filters( 'rating-report/settings/display', array(
 			'main' => array(
-				'display_location' => array(
+				'display_location'     => array(
 					'id'      => 'display_location',
 					'name'    => esc_html__( 'Automatic Display', 'rating-report' ),
 					'desc'    => __( 'If a location is selected, the rating report will be automatically added to your blog posts when the ratings are filled out.', 'rating-report' ),
@@ -239,7 +239,7 @@ function rating_report_get_registered_settings() {
 						'after'  => esc_html__( 'After Post', 'rating-report' )
 					)
 				),
-				'display_type'     => array(
+				'display_type'         => array(
 					'id'      => 'display_type',
 					'name'    => esc_html__( 'Display Type', 'rating-report' ),
 					'desc'    => __( 'What the rating report looks like on the front-end.', 'rating-report' ),
@@ -250,33 +250,94 @@ function rating_report_get_registered_settings() {
 						'graph' => esc_html__( 'Graph', 'rating-report' )
 					)
 				),
-				'disable_styles'   => array(
+				'disable_styles'       => array(
 					'id'   => 'disable_styles',
 					'name' => __( 'Disable Styles', 'rating-report' ),
 					'desc' => __( 'Check this to disable the Rating Report stylesheet from being added to your site.', 'rating-report' ),
 					'type' => 'checkbox',
 					'std'  => false
 				),
+				'include_font_awesome' => array(
+					'id'   => 'include_font_awesome',
+					'name' => __( 'Load Font Awesome', 'rating-report' ),
+					'desc' => __( 'Check this to load the Font Awesome stylesheet. You only need to enable this if Font Awesome is not already included by your theme or another plugin.', 'rating-report' ),
+					'type' => 'checkbox',
+					'std'  => false
+				),
+			),
+			'text' => array(
+				'table_text_header'              => array(
+					'id'   => 'table_text_header',
+					'name' => esc_html__( 'Table Text', 'rating-report' ),
+					'desc' => __( 'Customize all the text used in the Rating Report "table" display.', 'rating-report' ),
+					'type' => 'header'
+				),
+				'table_title'                    => array(
+					'id'   => 'table_title',
+					'name' => esc_html__( 'Table Title', 'rating-report' ),
+					'desc' => __( 'Shown at the top, before the ratings.', 'rating-report' ),
+					'type' => 'text',
+					'std'  => esc_html__( 'Rating Report', 'rating-report' )
+				),
+				'table_overall_label'            => array(
+					'id'   => 'table_overall_label',
+					'name' => esc_html__( 'Overall Rating', 'rating-report' ),
+					'desc' => __( 'This text is shown before the overall rating. Examples might be: Overall, Final Rating, Average Rating.', 'rating-report' ),
+					'type' => 'text',
+					'std'  => esc_html__( 'Overall', 'rating-report' )
+				),
+				'table_category_rating_template' => array(
+					'id'   => 'table_category_rating_template',
+					'name' => esc_html__( 'Category Template', 'rating-report' ),
+					'desc' => sprintf( __( 'Template used for displaying the rating of each category. Use %s as a placeholder for the actual star rating.', 'rating-report' ), '<code>%s</code>' ),
+					'type' => 'text',
+					'std'  => __( '%s stars', 'rating-report' )
+				)
 			)
 		) ),
 		/* Rating Settings */
 		'ratings'    => apply_filters( 'rating-report/settings/ratings', array(
-			'main' => array(
-				'max_rating' => array(
+			'main'     => array(
+				'max_rating'          => array(
 					'id'   => 'max_rating',
 					'name' => esc_html__( 'Maximum Rating', 'rating-report' ),
 					'desc' => __( 'Enter the maximum rating number you want to support. Example: enter 5 to use a 5-star scale, or enter 10 to use a 10-star scale.', 'rating-report' ),
 					'type' => 'number',
 					'std'  => '5',
 				),
-				'half_stars' => array(
+				'half_stars'          => array(
 					'id'   => 'half_stars',
 					'name' => __( 'Enable Half Stars', 'rating-report' ),
 					'desc' => __( 'Check to enable half stars.', 'rating-report' ),
 					'type' => 'checkbox',
 					'std'  => false
 				),
-			)
+				'rating_type'         => array(
+					'id'      => 'rating_type',
+					'name'    => esc_html__( 'Rating Type (Categories)', 'rating-report' ),
+					'desc'    => sprintf( __( 'What type of ratings to show on the table. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
+					'type'    => 'select',
+					'std'     => 'numbers',
+					'options' => array(
+						'numbers'      => esc_html__( 'Numbers', 'rating-report' ),
+						'images'       => esc_html__( 'Images', 'rating-report' ),
+						'font_awesome' => esc_html__( 'Font Awesome Stars', 'rating-report' )
+					)
+				),
+				'rating_type_overall' => array(
+					'id'      => 'rating_type_overall',
+					'name'    => esc_html__( 'Rating Type (Overall)', 'rating-report' ),
+					'desc'    => sprintf( __( 'What type of ratings to show on the table. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>. Note that if you choose Images or Font Awesome Stars, the overall rating will be rounded to the nearest whole or half number (depending on whether or not you support half stars). The Number option will show an accurate decimal.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
+					'type'    => 'select',
+					'std'     => 'numbers',
+					'options' => array(
+						'numbers'      => esc_html__( 'Numbers', 'rating-report' ),
+						'images'       => esc_html__( 'Images', 'rating-report' ),
+						'font_awesome' => esc_html__( 'Font Awesome Stars', 'rating-report' )
+					)
+				),
+			),
+			'graphics' => array()
 		) ),
 		/* Misc */
 		'misc'       => apply_filters( 'rating-report/settings/misc', array(
@@ -416,13 +477,6 @@ function rating_report_restore_default_settings() {
 		}
 
 		foreach ( $settings as $key => $options ) {
-			// Special circumstances for the 'book_layout' field.
-			if ( $key == 'book_layout' ) {
-				$rating_report_options[ $key ] = rating_report_get_default_book_field_values();
-
-				continue;
-			}
-
 			if ( ! array_key_exists( 'std', $options ) ) {
 				continue;
 			}
@@ -603,10 +657,12 @@ function rating_report_get_registered_settings_sections() {
 			'main' => __( 'Categories', 'rating-report' )
 		) ),
 		'display'    => apply_filters( 'rating-report/settings/sections/display', array(
-			'main' => __( 'Display', 'rating-report' )
+			'main' => __( 'Settings', 'rating-report' ),
+			'text' => __( 'Text', 'rating-report' )
 		) ),
 		'ratings'    => apply_filters( 'rating-report/settings/sections/ratings', array(
-			'main' => __( 'Ratings', 'rating-report' )
+			'main'     => __( 'Settings', 'rating-report' ),
+			'graphics' => __( 'Graphics', 'rating-report' )
 		) ),
 		'misc'       => apply_filters( 'rating-report/settings/sections/misc', array(
 			'main' => __( 'Misc', 'rating-report' ),

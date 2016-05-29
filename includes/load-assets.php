@@ -40,7 +40,18 @@ function rating_report_register_styles() {
 	wp_enqueue_style( 'rating-report' );
 
 	// Add inline CSS
-	//wp_add_inline_style( 'novelist', rating_report_generate_css() );
+	wp_add_inline_style( 'rating-report', rating_report_generate_css() );
 }
 
 add_action( 'wp_enqueue_scripts', 'rating_report_register_styles' );
+
+function rating_report_generate_css() {
+	$css = '';
+
+	$bar_bg = rating_report_get_option( 'bar_bg', '#3CB2D2' );
+	if ( $bar_bg ) {
+		$css .= '.rating-report-bar { background: ' . esc_attr( $bar_bg ) . ' }';
+	}
+
+	return apply_filters( 'rating-report/generated-css', $css );
+}

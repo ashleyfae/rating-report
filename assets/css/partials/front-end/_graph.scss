@@ -1,0 +1,48 @@
+.rating-report-graph {
+    display: flex;
+    height: 300px;
+    justify-content: space-between;
+
+    .rating-report-category {
+        position: relative;
+        width: 17%;
+        vertical-align: bottom;
+    }
+}
+
+.rating-report-graph-values {
+    margin-top: 2em;
+}
+
+.rating-report-graph-labels {
+    margin: .25em 0 2em;
+
+    .rating-report-category-name {
+        text-align: center;
+    }
+}
+
+.rating-report-bar {
+    background: #3CB2D2;
+    max-height: 300px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    vertical-align: bottom;
+}
+
+.rating-report-bar-number {
+    color: white;
+    font: {
+        size: 42px;
+    }
+    line-height: 1;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+}

@@ -226,7 +226,7 @@ function rating_report_get_registered_settings() {
 		) ),
 		/* Display Settings */
 		'display'    => apply_filters( 'rating-report/settings/display', array(
-			'main' => array(
+			'main'        => array(
 				'display_location'     => array(
 					'id'      => 'display_location',
 					'name'    => esc_html__( 'Automatic Display', 'rating-report' ),
@@ -265,7 +265,7 @@ function rating_report_get_registered_settings() {
 					'std'  => false
 				),
 			),
-			'text' => array(
+			'text'        => array(
 				'table_text_header'              => array(
 					'id'   => 'table_text_header',
 					'name' => esc_html__( 'Table Text', 'rating-report' ),
@@ -293,6 +293,27 @@ function rating_report_get_registered_settings() {
 					'type' => 'text',
 					'std'  => __( '%s stars', 'rating-report' )
 				)
+			),
+			'graph-style' => array(
+				'graph_style_header' => array(
+					'id'   => 'graph_style_header',
+					'name' => esc_html__( 'Graph Style', 'rating-report' ),
+					'desc' => __( 'Customize the colours and display for the "graph" format.', 'rating-report' ),
+					'type' => 'header'
+				),
+				'bar_bg'             => array(
+					'id'   => 'bar_bg',
+					'name' => esc_html__( 'Bar Background', 'rating-report' ),
+					'type' => 'color',
+					'std'  => '#3CB2D2'
+				),
+				'show_numbers'       => array(
+					'id'   => 'show_numbers',
+					'name' => __( 'Show Numbers', 'rating-report' ),
+					'desc' => __( 'Check this to display your rating numbers inside the bar graph.', 'rating-report' ),
+					'type' => 'checkbox',
+					'std'  => false
+				),
 			)
 		) ),
 		/* Rating Settings */
@@ -657,8 +678,9 @@ function rating_report_get_registered_settings_sections() {
 			'main' => __( 'Categories', 'rating-report' )
 		) ),
 		'display'    => apply_filters( 'rating-report/settings/sections/display', array(
-			'main' => __( 'Settings', 'rating-report' ),
-			'text' => __( 'Text', 'rating-report' )
+			'main'        => __( 'Settings', 'rating-report' ),
+			'text'        => __( 'Table Text', 'rating-report' ),
+			'graph-style' => __( 'Graph Style', 'rating-report' )
 		) ),
 		'ratings'    => apply_filters( 'rating-report/settings/sections/ratings', array(
 			'main'     => __( 'Settings', 'rating-report' ),

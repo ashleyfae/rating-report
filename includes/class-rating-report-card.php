@@ -378,7 +378,39 @@ class Rating_Report_Card {
 
 	}
 
+	/**
+	 * Render Graph Report
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
 	public function render_graph() {
+
+		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		?>
+		<div class="rating-report rating-report-graph rating-report-graph-values">
+			<?php foreach ( $this->ratings as $key => $value ) :
+				$percentage = round( ( $value['rating'] / $this->maximum_rating ) * 100 );
+				?>
+				<div class="rating-report-category rating-report-category-<?php echo strtolower( sanitize_html_class( $value['category'] ) ); ?>">
+					<div class="rating-report-bar" style="height: <?php echo absint( $percentage ); ?>%;"></div>
+					<?php if ( $show_numbers ) : ?>
+						<span class="rating-report-bar-number"><?php echo esc_html( $value['rating'] ); ?></span>
+					<?php endif; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="rating-report rating-report-graph rating-report-graph-labels">
+			<?php foreach ( $this->ratings as $key => $value ) : ?>
+				<div class="rating-report-category rating-report-category-<?php echo strtolower( sanitize_html_class( $value['category'] ) ); ?>">
+					<div class="rating-report-category-name">
+						<?php echo esc_html( $value['category'] ); ?>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<?php
 
 	}
 

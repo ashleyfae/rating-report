@@ -34,4 +34,45 @@ x.0 Text Repeat
 .rating-report-link-remove {
   width: 50px; }
 
+.rating-report-field-row {
+  margin: 1.5em 0; }
+  @media (min-width: 900px) {
+    .rating-report-field-row {
+      clear: both;
+      overflow: hidden; } }
+  .rating-report-field-row label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 3px; }
+    @media (min-width: 900px) {
+      .rating-report-field-row label {
+        float: left;
+        margin: 0;
+        width: 18%; } }
+  .rating-report-field-row input[type="text"]:not(.rating-report-color-picker):not(.text-small),
+  .rating-report-field-row input[type="url"] {
+    display: block;
+    width: 99%; }
+  .rating-report-field-row .text-small,
+  .rating-report-field-row input[type="number"] {
+    display: inline-block;
+    width: auto; }
+  .rating-report-field-row .desc {
+    color: #666;
+    display: block;
+    font-size: 14px;
+    font-style: italic;
+    margin: 2px 0 5px; }
+  @media (min-width: 900px) {
+    .rating-report-field-row .rating-report-field {
+      float: right;
+      width: 80%; } }
+
+@media (min-width: 768px) {
+  .rating-report-half {
+    float: left;
+    width: 48%; }
+    .rating-report-half.last {
+      float: right; } }
+
 /*# sourceMappingURL=rating-report-admin.css.map */

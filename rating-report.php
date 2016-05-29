@@ -150,10 +150,11 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 			// Settings.
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/settings/register-settings.php';
 			if ( empty( $rating_report_options ) ) {
-				//$rating_report_options = rating_report_get_settings();
+				$rating_report_options = rating_report_get_settings();
 			}
 			
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/class-rating-report-card.php';
+			require_once RATING_REPORT_PLUGIN_DIR . 'includes/functions.php';
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/load-assets.php';
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/shortcodes.php';
 

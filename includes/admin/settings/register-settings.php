@@ -127,7 +127,7 @@ function rating_report_delete_option( $key = '' ) {
  * @return array Rating Report settings
  */
 function rating_report_get_settings() {
-	$settings = get_option( 'rating_report_settings' );
+	$settings = get_option( 'rating_report_settings', array() );
 
 	return apply_filters( 'rating-report/get-settings', $settings );
 }
@@ -217,13 +217,7 @@ function rating_report_get_registered_settings() {
 					'name'    => esc_html__( 'Rating Categories', 'rating-report' ),
 					'desc'    => __( 'Set up the categories you\'ll use for rating criteria.', 'rating-report' ),
 					'type'    => 'repeat_text',
-					'std'     => array(
-						esc_html__( 'Characters', 'rating-report' ),
-						esc_html__( 'Plot', 'rating-report' ),
-						esc_html__( 'Writing', 'rating-report' ),
-						esc_html__( 'Pacing', 'rating-report' ),
-						esc_html__( 'Cover', 'rating-report' )
-					),
+					'std'     => rating_report_get_default_categories(),
 					'options' => array(
 						'label' => esc_html__( 'Add Category', 'rating-report' )
 					)
@@ -322,6 +316,10 @@ function rating_report_settings_sanitize( $input = array() ) {
 		return $input;
 	}
 
+	if ( ! is_array( $rating_report_options ) ) {
+		$rating_report_options = array();
+	}
+
 	parse_str( $_POST['_wp_http_referer'], $referrer );
 
 	$settings = rating_report_get_registered_settings();
@@ -350,7 +348,7 @@ function rating_report_settings_sanitize( $input = array() ) {
 
 	if ( ! empty( $found_settings ) ) {
 		foreach ( $found_settings as $key => $value ) {
-			if ( empty( $input[ $key ] ) || ! array_key_exists( $key, $input ) ) {
+			if ( ( empty( $input[ $key ] ) || ! array_key_exists( $key, $input ) ) && array_key_exists( $key, $rating_report_options ) ) {
 				unset( $rating_report_options[ $key ] );
 			}
 		}

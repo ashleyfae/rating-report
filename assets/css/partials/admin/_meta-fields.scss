@@ -1,0 +1,62 @@
+.rating-report-field-row {
+    margin: 1.5em 0;
+
+    @media (min-width: 900px) {
+        clear: both;
+        overflow: hidden;
+    }
+
+    label {
+        display: block;
+        font: {
+            weight: bold;
+        }
+        margin-bottom: 3px;
+
+        @media (min-width: 900px) {
+            float: left;
+            margin: 0;
+            width: 18%;
+        }
+    }
+
+    input[type="text"]:not(.rating-report-color-picker):not(.text-small),
+    input[type="url"] {
+        display: block;
+        width: 99%;
+    }
+
+    .text-small,
+    input[type="number"] {
+        display: inline-block;
+        width: auto;
+    }
+
+    .desc {
+        color: #666;
+        display: block;
+        font: {
+            size: 14px;
+            style: italic;
+        }
+        margin: 2px 0 5px;
+    }
+
+    @media (min-width: 900px) {
+        .rating-report-field {
+            float: right;
+            width: 80%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .rating-report-half {
+        float: left;
+        width: 48%;
+
+        &.last {
+            float: right;
+        }
+    }
+}

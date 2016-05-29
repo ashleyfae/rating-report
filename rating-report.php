@@ -161,7 +161,6 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 				//require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/admin-actions.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/admin-pages.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/class-rr-notices.php';
-				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/class-welcome.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/meta-box.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/sanitize-meta-fields.php';

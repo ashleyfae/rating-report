@@ -1,0 +1,37 @@
+/*--------------------------------------------------------------
+x.0 Base Settings Panel
+--------------------------------------------------------------*/
+.settings_page_rating-report .form-table .desc {
+  color: #666;
+  display: block;
+  font-size: 14px;
+  font-style: italic;
+  margin: 2px 0 5px; }
+.settings_page_rating-report .form-table input[type="checkbox"] + label {
+  display: inline; }
+@media (min-width: 768px) {
+  .settings_page_rating-report .rating-report-settings-buttons {
+    clear: both;
+    overflow: hidden; }
+    .settings_page_rating-report .rating-report-settings-buttons p {
+      float: left;
+      margin: 20px 10px 0 0;
+      padding: 20px 0 10px; } }
+
+/*--------------------------------------------------------------
+x.0 Text Repeat
+--------------------------------------------------------------*/
+.rating-report-repeat-text {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-bottom: .5em; }
+  .rating-report-repeat-text th {
+    padding: 15px 10px; }
+  .rating-report-repeat-text input {
+    max-width: 100%; }
+
+.rating-report-link-remove {
+  width: 50px; }
+
+/*# sourceMappingURL=rating-report-admin.css.map */

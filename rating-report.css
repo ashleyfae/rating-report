@@ -1,0 +1,183 @@
+/*	--------------------------------------------------
+	:: Stars
+	-------------------------------------------------- */
+	.rr-rating {
+		background:url('ratings/small_yellow/grey.png') repeat-x;
+		font-size:0;
+		height:16px;
+		width:80px;
+		line-height:0;
+		overflow:hidden;
+		text-indent: -999em;
+		display:inline-block;
+	}
+	.rr-stars {
+		background:url('ratings/small_yellow/filled.png') repeat-x 0 100%;
+		float:left;
+		height:16px;
+	}
+	
+		/* Smile Yellow */
+		.rr-rating.rr-smile-yellow {
+			background:url('ratings/smile_yellow/grey.png') repeat-x;
+			height:26px;
+			width:125px;
+		}
+		.rr-smile-yellow .rr-stars {
+			background:url('ratings/smile_yellow/filled.png') repeat-x 0 100%;
+			height:26px;
+		}
+		
+		/* Circle Blue */
+		.rr-rating.rr-circle-blue {
+			background:url('ratings/circle_blue/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-blue .rr-stars {
+			background:url('ratings/circle_blue/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Circle Pink */
+		.rr-rating.rr-circle-pink {
+			background:url('ratings/circle_pink/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-pink .rr-stars {
+			background:url('ratings/circle_pink/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Circle Red */
+		.rr-rating.rr-circle-red {
+			background:url('ratings/circle_red/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-red .rr-stars {
+			background:url('ratings/circle_red/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Circle Green */
+		.rr-rating.rr-circle-green {
+			background:url('ratings/circle_green/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-green .rr-stars {
+			background:url('ratings/circle_green/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Circle Yellow */
+		.rr-rating.rr-circle-yellow {
+			background:url('ratings/circle_yellow/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-yellow .rr-stars {
+			background:url('ratings/circle_yellow/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Circle Black */
+		.rr-rating.rr-circle-black {
+			background:url('ratings/circle_black/grey.png') repeat-x;
+			width:90px;
+		}
+		.rr-circle-black .rr-stars {
+			background:url('ratings/circle_black/filled.png') repeat-x 0 100%;
+		}
+		
+		/* Green */
+		.rr-rating.rr-green {
+			background:url('ratings/green/grey.png') repeat-x;
+			height:32px;
+			width:160px;
+		}
+		.rr-green .rr-stars {
+			background:url('ratings/green/filled.png') repeat-x 0 100%;
+			height:32px;
+		}
+		
+		/* Orange */
+		.rr-rating.rr-orange {
+			background:url('ratings/orange/grey.png') repeat-x;
+			height:32px;
+			width:160px;
+		}
+		.rr-orange .rr-stars {
+			background:url('ratings/orange/filled.png') repeat-x 0 100%;
+			height:32px;
+		}
+		
+		/* Purple */
+		.rr-rating.rr-purple {
+			background:url('ratings/purple/grey.png') repeat-x;
+			height:32px;
+			width:160px;
+		}
+		.rr-purple .rr-stars {
+			background:url('ratings/purple/filled.png') repeat-x 0 100%;
+			height:32px;
+		}
+		
+		/* Red */
+		.rr-rating.rr-red {
+			background:url('ratings/red/grey.png') repeat-x;
+			height:32px;
+			width:160px;
+		}
+		.rr-red .rr-stars {
+			background:url('ratings/red/filled.png') repeat-x 0 100%;
+			height:32px;
+		}
+		
+		/* Black */
+		.rr-rating.rr-black {
+			background:url('ratings/black/grey.png') repeat-x;
+			height:32px;
+			width:160px;
+		}
+		.rr-black .rr-stars {
+			background:url('ratings/black/filled.png') repeat-x 0 100%;
+			height:32px;
+		}
+		
+		/* Custom */
+		.rr-rating.rr-custom {
+			background:none;
+		}
+
+	
+/*	--------------------------------------------------
+	:: Rating List 3
+	-------------------------------------------------- */
+	.rating-report {
+		width:60%;
+		margin:10px auto;
+		border:1px solid #DDD;
+	}
+		.rating-report td {
+			padding:5px 10px;
+			background:#fff;
+			border-bottom:1px solid #DDD;
+		}
+		
+	.rating-report th {
+		font-size:20px !important;
+		text-align:center;
+		/*background:#f5f5f5;*/
+		font-weight:normal;
+		border-bottom:1px solid #DDD;
+		padding:5px 10px;
+	}
+	.rating-report .section-title { font-weight:bold; }
+	.rating-report .section-rating .rr-rating { float:right; }
+	.rating-report .overall {
+		font-size:30px !important;
+		background:#f5f5f5;
+	}
+		.rating-report .overall td { text-align:center; border:1px solid #DDD; padding:10px; }
+		.rating-report .overall .section-title {  font-weight:normal; width:50%; font-size:100% !important; }
+		.rating-report .overall .section-rating {
+			font-weight:bold;
+			color:#98ab41;
+			background:#ececec;
+			font-family:'Arial Black', Arial, sans-serif;
+			float:none;
+			font-size:100% !important;
+		}

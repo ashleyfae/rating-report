@@ -26,7 +26,7 @@ function rating_report_register_styles() {
 	 */
 
 	if ( rating_report_get_option( 'include_font_awesome', false ) ) {
-		// @todo
+		wp_enqueue_style( 'font-awesome', RATING_REPORT_PLUGIN_URL . '/assets/css/font-awesome' . $suffix . '.css', array(), '4.6.1' );
 	}
 
 	/*
@@ -45,6 +45,12 @@ function rating_report_register_styles() {
 
 add_action( 'wp_enqueue_scripts', 'rating_report_register_styles' );
 
+/**
+ * Generate CSS based on style settings.
+ *
+ * @since 1.0
+ * @return string
+ */
 function rating_report_generate_css() {
 	$css = '';
 

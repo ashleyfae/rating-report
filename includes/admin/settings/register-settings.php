@@ -362,7 +362,19 @@ function rating_report_get_registered_settings() {
 				'empty_star' => array(
 					'id'   => 'empty_star',
 					'name' => esc_html__( 'Empty Star Graphic', 'rating-report' ),
-					'desc' => __( 'Upload an image for empty stars.', 'rating-report' ),
+					'desc' => __( 'Optional. If set, this graphic will be used to "fill up" the rating to your maximum stars.', 'rating-report' ),
+					'type' => 'image',
+					'std'  => ''
+				),
+				'half_star'  => array(
+					'id'   => 'half_star',
+					'name' => esc_html__( 'Half Star Graphic', 'rating-report' ),
+					'type' => 'image',
+					'std'  => ''
+				),
+				'full_star'  => array(
+					'id'   => 'full_star',
+					'name' => esc_html__( 'Full Star Graphic', 'rating-report' ),
 					'type' => 'image',
 					'std'  => ''
 				)
@@ -1050,5 +1062,7 @@ function rating_report_image_callback( $args ) {
 		<input type="button" value="<?php esc_attr_e( 'Remove Image', 'rating-report' ); ?>" class="button-secondary rating-report-remove-image-button" style="<?php echo empty( $value ) ? 'display: none;' : ''; ?>">
 		<input type="hidden" id="rating_report_settings_<?php echo rating_report_sanitize_key( $args['id'] ); ?>" name="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" value="<?php echo esc_attr( $value ); ?>">
 	</div>
-	<?php
+	<?php if ( array_key_exists( 'desc', $args ) && ! empty( $args['desc'] ) ) : ?>
+		<label for="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" class="desc"><?php echo wp_kses_post( $args['desc'] ); ?></label>
+	<?php endif;
 }

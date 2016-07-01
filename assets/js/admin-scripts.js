@@ -1,7 +1,5 @@
 (function ($) {
 
-    var ratingReportGalleryFrame;
-
     var Rating_Report = {
 
         /**
@@ -75,16 +73,11 @@
         addImage: function (element, e) {
             e.preventDefault();
 
+            var ratingReportGalleryFrame;
             var imageIDField = $('#' + element.parent().data('value'));
             var imageSRCField = $('#' + element.parent().data('image'));
 
             element.nextAll('.rating-report-remove-image-button').show();
-
-            // If the media frame already exists, reopen it.
-            if (ratingReportGalleryFrame) {
-                ratingReportGalleryFrame.open();
-                return;
-            }
 
             // Create the media frame.
             ratingReportGalleryFrame = wp.media.frames.rating_report = wp.media({

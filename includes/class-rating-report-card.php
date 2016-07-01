@@ -210,20 +210,38 @@ class Rating_Report_Card {
 	/**
 	 * Get Graphical Stars
 	 *
-	 * @todo
+	 * @uses Rating_Report_Card::create_star_rating()
 	 *
 	 * @param int|float $value Numerical rating value
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @return string
+	 * @return string|bool False on failure
 	 */
 	public function get_images_rating( $value ) {
-		//@todo
+
+		$empty_star_id = rating_report_get_option( 'empty_star' );
+		$half_star_id  = rating_report_get_option( 'half_star' );
+		$full_star_id  = rating_report_get_option( 'full_star' );
+
+		if ( empty( $full_star_id ) ) {
+			return false;
+		}
+
+		$empty_star_html = ! empty( $empty_star_id ) ? wp_get_attachment_image( $empty_star_id, 'full' ) : '';
+		$half_star_html  = ! empty( $half_star_id ) ? wp_get_attachment_image( $half_star_id, 'full' ) : '';
+		$full_star_html  = ! empty( $full_star_id ) ? wp_get_attachment_image( $full_star_id, 'full' ) : '';
+
+		$final_rating = $this->create_star_rating( $value, $full_star_html, $half_star_html, $empty_star_html );
+
+		return apply_filters( 'rating-report/card/image-rating', $final_rating, $value, $this );
+
 	}
 
 	/**
 	 * Get Font Awesome Stars
+	 *
+	 * @uses Rating_Report_Card::create_star_rating()
 	 *
 	 * @param int|float $value Numerical rating value
 	 *
@@ -233,37 +251,46 @@ class Rating_Report_Card {
 	 */
 	public function get_font_awesome_rating( $value ) {
 
-		$final_rating = '';
+		$full_star_html  = '<i class="' . apply_filters( 'rating-report/card/font-awesome-full-star-icon', 'fa fa-star' ) . '"></i>';
+		$half_star_html  = '<i class="' . apply_filters( 'rating-report/card/font-awesome-half-star-icon', 'fa fa-star-half-full' ) . '"></i>';
+		$empty_star_html = apply_filters( 'rating-report/card/font-awesome-fill-up-empty', true ) ? '<i class="' . apply_filters( 'rating-report/card/font-awesome-empty-star-icon', 'fa fa-star-o' ) . '"></i>' : '';
 
-		$i = $value;
-
-		if ( $i >= 1 ) {
-			for ( $i; $i >= 1; $i -- ) {
-
-				$final_rating .= '<i class="' . apply_filters( 'rating-report/card/font-awesome-full-star-icon', 'fa fa-star' ) . '"></i>';
-
-				//this is a decimal and we're on the last one, so display a half star
-				if ( (float) $i == 1.5 ) {
-					$final_rating .= '<i class="' . apply_filters( 'rating-report/card/font-awesome-half-star-icon', 'fa fa-star-half-full' ) . '"></i>';
-				}
-			}
-		} elseif ( $i > 0 ) {
-			$final_rating .= '<i class="' . apply_filters( 'rating-report/card/font-awesome-half-star-icon', 'fa fa-star-half-full' ) . '"></i>';
-		}
-
-		// Now add the empty stars to fill up to our max.
-		if ( apply_filters( 'rating-report/card/font-awesome-fill-up-empty', true ) ) {
-			$empty_stars_needed = $this->maximum_rating - $value;
-			if ( $empty_stars_needed >= 1 ) {
-				for ( $j = $empty_stars_needed; $j >= 1; $j -- ) {
-
-					$final_rating .= '<i class="' . apply_filters( 'rating-report/card/font-awesome-empty-star-icon', 'fa fa-star-o' ) . '"></i>';
-				}
-			}
-		}
+		$final_rating = $this->create_star_rating( $value, $full_star_html, $half_star_html, $empty_star_html );
 
 		return apply_filters( 'rating-report/card/font-awesome-rating', $final_rating, $value, $this );
 
+	}
+
+	/**
+	 * Create Star Rating
+	 *
+	 * Repeats star strings a certain number of times based on the given rating.
+	 *
+	 * @see    wp_star_rating() Based on this function.
+	 *
+	 * @param int    $rating          Star rating in numerical form
+	 * @param string $full_star_html  HTML to repeat for all full stars
+	 * @param string $half_star_html  HTML to repeat for all half stars
+	 * @param string $empty_star_html HTML to repeat until we reach maximum rating
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return string
+	 */
+	public function create_star_rating( $rating = 5, $full_star_html = '', $half_star_html = '', $empty_star_html = '' ) {
+		// Calculate the number of each type of star needed
+		$full_stars  = floor( $rating );
+		$half_stars  = ceil( $rating - $full_stars );
+		$empty_stars = 5 - $full_stars - $half_stars;
+
+		// Create screen reader text.
+		$output = '<span class="screen-reader-text">' . sprintf( __( '%s star rating', 'rating-report' ), $rating ) . '</span>';
+
+		$output .= str_repeat( $full_star_html, $full_stars );
+		$output .= str_repeat( $half_star_html, $half_stars );
+		$output .= str_repeat( $empty_star_html, $empty_stars );
+
+		return $output;
 	}
 
 	/**

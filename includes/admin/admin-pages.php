@@ -1,7 +1,7 @@
 <?php
 /**
  * Admin Pages
- * 
+ *
  * Creates admin pages and loads any required assets on those pages.
  *
  * @package   rating-report
@@ -35,7 +35,7 @@ add_action( 'admin_menu', 'rating_report_add_options_link', 10 );
  * @return bool
  */
 function rating_report_is_admin_page() {
-	$screen           = get_current_screen();
+	$screen                = get_current_screen();
 	$is_rating_report_page = false;
 
 	if ( $screen->base == 'settings_page_rating-report' ) {
@@ -99,8 +99,11 @@ function rating_report_load_admin_scripts( $hook ) {
 	wp_enqueue_script( 'rating-report-admin-scripts' );
 
 	$settings = array(
-		'text_remove'   => __( 'Remove', 'rating-report' ),
-		'confirm_reset' => __( 'Are you sure you wish to revert all the settings in this tab to their default values? This cannot be undone.', 'rating-report' )
+		'text_remove'    => __( 'Remove', 'rating-report' ),
+		'confirm_reset'  => __( 'Are you sure you wish to revert all the settings in this tab to their default values? This cannot be undone.', 'rating-report' ),
+		'gallery_title'  => __( 'Select an Image', 'rating-report' ),
+		'gallery_update' => __( 'Update Image', 'rating-report' ),
+		'gallery_delete' => __( 'Delete Image', 'rating-report' )
 	);
 
 	wp_localize_script( 'rating-report-admin-scripts', 'RATING_REPORT', apply_filters( 'rating-report/admin-scripts-settings', $settings ) );

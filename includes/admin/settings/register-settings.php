@@ -358,7 +358,15 @@ function rating_report_get_registered_settings() {
 					)
 				),
 			),
-			'graphics' => array()
+			'graphics' => array(
+				'empty_star' => array(
+					'id'   => 'empty_star',
+					'name' => esc_html__( 'Empty Star Graphic', 'rating-report' ),
+					'desc' => __( 'Upload an image for empty stars.', 'rating-report' ),
+					'type' => 'image',
+					'std'  => ''
+				)
+			)
 		) ),
 		/* Misc */
 		'misc'       => apply_filters( 'rating-report/settings/misc', array(
@@ -585,6 +593,22 @@ function rating_report_settings_sanitize_color_field( $input ) {
 }
 
 add_filter( 'rating-report/settings/sanitize/color', 'rating_report_settings_sanitize_color_field' );
+
+/**
+ * Sanitize Image Field
+ *
+ * Should be an integer (attachment ID).
+ *
+ * @param int $input
+ *
+ * @since 1.0
+ * @return int
+ */
+function rating_report_settings_sanitize_image_field( $input ) {
+	return absint( $input );
+}
+
+add_filter( 'rating-report/settings/sanitize/image', 'rating_report_settings_sanitize_image_field' );
 
 /**
  * Sanitize Checkbox Field
@@ -986,4 +1010,45 @@ function rating_report_header_callback( $args ) {
 	if ( array_key_exists( 'desc', $args ) && ! empty( $args['desc'] ) ) {
 		echo '<div class="desc">' . wp_kses_post( $args['desc'] ) . '</div>';
 	}
+}
+
+/**
+ * Callback: Image
+ *
+ * @param array  $args
+ *
+ * @global array $rating_report_options
+ *
+ * @since 1.0
+ * @return void
+ */
+function rating_report_image_callback( $args ) {
+	global $rating_report_options;
+
+	if ( isset( $rating_report_options[ $args['id'] ] ) ) {
+		$value = $rating_report_options[ $args['id'] ];
+	} else {
+		$value = isset( $args['std'] ) ? $args['std'] : '';
+	}
+
+	// Display the image if it exists.
+	if ( ! empty( $value ) ) {
+		$attr = array(
+			'id'    => 'rating_report_settings_' . rating_report_sanitize_key( $args['id'] ) . '_image',
+			'class' => 'rating-report-image-upload-image'
+		);
+		echo wp_get_attachment_image( intval( $value ), 'medium', false, $attr );
+	} else {
+		// Empty image.
+		echo '<img src="" id="rating_report_settings_' . rating_report_sanitize_key( $args['id'] ) . '_image" style="display:none;">';
+	}
+
+	// Display the image and buttons.
+	?>
+	<div class="rating-report-image-upload-buttons-wrap" data-image="rating_report_settings_<?php echo rating_report_sanitize_key( $args['id'] ); ?>_image" data-value="rating_report_settings_<?php echo rating_report_sanitize_key( $args['id'] ); ?>">
+		<input type="button" value="<?php esc_attr_e( 'Upload Image', 'rating-report' ); ?>" class="button-secondary rating-report-upload-image-button">
+		<input type="button" value="<?php esc_attr_e( 'Remove Image', 'rating-report' ); ?>" class="button-secondary rating-report-remove-image-button" style="<?php echo empty( $value ) ? 'display: none;' : ''; ?>">
+		<input type="hidden" id="rating_report_settings_<?php echo rating_report_sanitize_key( $args['id'] ); ?>" name="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" value="<?php echo esc_attr( $value ); ?>">
+	</div>
+	<?php
 }

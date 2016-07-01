@@ -79,15 +79,6 @@ function rating_report_load_admin_scripts( $hook ) {
 
 	// Media Upload
 	wp_enqueue_media();
-	wp_register_script( 'rating-report-media-upload', $js_dir . 'media-upload' . $suffix . '.js', array( 'jquery' ), RATING_REPORT_VERSION, true );
-	wp_enqueue_script( 'rating-report-media-upload' );
-
-	$settings = array(
-		'text_title'  => __( 'Upload or Select an Image', 'rating-report' ),
-		'text_button' => __( 'Insert Image', 'rating-report' )
-	);
-
-	wp_localize_script( 'rating-report-media-upload', 'RATING_REPORT_MEDIA', apply_filters( 'rating-report/media-upload-js-settings', $settings ) );
 
 	$admin_deps = array(
 		'jquery',

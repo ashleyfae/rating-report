@@ -34,6 +34,13 @@ x.0 Text Repeat
 .rating-report-link-remove {
   width: 50px; }
 
+.rating-report-category {
+  border-top: 1px solid #eee;
+  margin: 0 -6px;
+  padding: 0 6px; }
+  .rating-report-category:first-child {
+    border: none; }
+
 .rating-report-field-row {
   margin: 1.5em 0; }
   @media (min-width: 900px) {
@@ -49,10 +56,14 @@ x.0 Text Repeat
         float: left;
         margin: 0;
         width: 18%; } }
+  .rating-report-field-row textarea,
   .rating-report-field-row input[type="text"]:not(.rating-report-color-picker):not(.text-small),
   .rating-report-field-row input[type="url"] {
     display: block;
     width: 99%; }
+  .rating-report-field-row textarea {
+    height: 75px;
+    max-width: 400px; }
   .rating-report-field-row .text-small,
   .rating-report-field-row input[type="number"] {
     display: inline-block;

@@ -1,3 +1,13 @@
+.rating-report-category {
+    border-top: 1px solid #eee;
+    margin: 0 -6px;
+    padding: 0 6px;
+
+    &:first-child {
+        border: none;
+    }
+}
+
 .rating-report-field-row {
     margin: 1.5em 0;
 
@@ -20,10 +30,16 @@
         }
     }
 
+    textarea,
     input[type="text"]:not(.rating-report-color-picker):not(.text-small),
     input[type="url"] {
         display: block;
         width: 99%;
+    }
+
+    textarea {
+        height: 75px;
+        max-width: 400px;
     }
 
     .text-small,

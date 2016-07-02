@@ -57,21 +57,36 @@ function rating_report_render_rating_fields( $post ) {
 	$rating_scale  = rating_report_get_rating_scale();
 	$saved_ratings = get_post_meta( $post->ID, 'rating_report', true );
 	$saved_ratings = is_array( $saved_ratings ) ? $saved_ratings : array();
+	$descriptions  = get_post_meta( $post->ID, 'rating_report_descriptions', true );
+	$descriptions  = is_array( $descriptions ) ? $descriptions : array();
 
 	foreach ( $categories as $key => $name ) {
 		$number      = ( $key + 1 );
 		$field_id    = 'rating_report_category_' . $number;
 		$saved_value = array_key_exists( $key, $saved_ratings ) ? $saved_ratings[ $key ] : '';
 		?>
-		<div class="rating-report-field-row">
-			<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $name ); ?></label>
-			<div class="rating-report-field">
-				<select id="<?php echo esc_attr( $field_id ); ?>" name="rating_report[]">
-					<option value="" <?php selected( $saved_value, '' ); ?>><?php esc_html_e( '- Select -', 'rating-report' ); ?></option>
-					<?php foreach ( $rating_scale as $rating_value => $rating_name ) : ?>
-						<option value="<?php echo esc_attr( $rating_value ); ?>" <?php selected( $saved_value, $rating_value ); ?>><?php echo esc_html( $rating_name ); ?></option>
-					<?php endforeach; ?>
-				</select>
+		<div class="rating-report-category">
+			<div class="rating-report-field-row">
+				<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $name ); ?></label>
+				<div class="rating-report-field">
+					<select id="<?php echo esc_attr( $field_id ); ?>" name="rating_report[]">
+						<option value="" <?php selected( $saved_value, '' ); ?>><?php esc_html_e( '- Select -', 'rating-report' ); ?></option>
+						<?php foreach ( $rating_scale as $rating_value => $rating_name ) : ?>
+							<option value="<?php echo esc_attr( $rating_value ); ?>" <?php selected( $saved_value, $rating_value ); ?>><?php echo esc_html( $rating_name ); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
+
+			<?php
+			$field_id    = 'rating_report_description_' . $number;
+			$saved_value = array_key_exists( $key, $descriptions ) ? $descriptions[ $key ] : '';
+			?>
+			<div class="rating-report-field-row">
+				<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( sprintf( __( '%s Comments', 'rating-report' ), $name ) ); ?></label>
+				<div class="rating-report-field">
+					<textarea id="<?php echo esc_attr( $field_id ); ?>" name="rating_report_descriptions[]"><?php echo esc_textarea( $saved_value ); ?></textarea>
+				</div>
 			</div>
 		</div>
 		<?php

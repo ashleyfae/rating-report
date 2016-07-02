@@ -246,8 +246,9 @@ function rating_report_get_registered_settings() {
 					'type'    => 'select',
 					'std'     => 'table',
 					'options' => array(
-						'table' => esc_html__( 'Table', 'rating-report' ),
-						'graph' => esc_html__( 'Graph', 'rating-report' )
+						'table'            => esc_html__( 'Table', 'rating-report' ),
+						'horizontal_graph' => esc_html__( 'Horizontal Graph', 'rating-report' ),
+						'vertical_graph'   => esc_html__( 'Vertical Graph', 'rating-report' )
 					)
 				),
 				'disable_styles'       => array(
@@ -301,11 +302,19 @@ function rating_report_get_registered_settings() {
 					'desc' => __( 'Customize the colours and display for the "graph" format.', 'rating-report' ),
 					'type' => 'header'
 				),
-				'bar_bg'             => array(
-					'id'   => 'bar_bg',
-					'name' => esc_html__( 'Bar Background', 'rating-report' ),
+				'bar_color'             => array(
+					'id'   => 'bar_color',
+					'name' => esc_html__( 'Bar Colour', 'rating-report' ),
+					'desc' => __( 'Colour of the filled in section of the bar.', 'rating-report' ),
 					'type' => 'color',
 					'std'  => '#3CB2D2'
+				),
+				'bar_bg'   => array(
+					'id'   => 'bar_bg',
+					'name' => esc_html__( 'Bar Background', 'rating-report' ),
+					'desc' => __( 'Colour of the "empty" section of the bar. This will fill up to the maximum level.', 'rating-report' ),
+					'type' => 'color',
+					'std'  => '#eeeeee'
 				),
 				'show_numbers'       => array(
 					'id'   => 'show_numbers',

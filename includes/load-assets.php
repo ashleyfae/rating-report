@@ -54,9 +54,14 @@ add_action( 'wp_enqueue_scripts', 'rating_report_register_styles' );
 function rating_report_generate_css() {
 	$css = '';
 
-	$bar_bg = rating_report_get_option( 'bar_bg', '#3CB2D2' );
+	$bar_color = rating_report_get_option( 'bar_color', '#3CB2D2' );
+	if ( $bar_color ) {
+		$css .= '.rating-report-bar { background: ' . esc_attr( $bar_color ) . ' }';
+	}
+
+	$bar_bg = rating_report_get_option( 'bar_bg', '#eeeeee' );
 	if ( $bar_bg ) {
-		$css .= '.rating-report-bar { background: ' . esc_attr( $bar_bg ) . ' }';
+		$css .= '.rating-report-graph-values .rating-report-category, .rating-report-bar-wrap { background: ' . esc_attr( $bar_bg ) . ' }';
 	}
 
 	return apply_filters( 'rating-report/generated-css', $css );

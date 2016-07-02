@@ -429,6 +429,81 @@ class Rating_Report_Card {
 
 	}
 
+	public function render_horizontal_graph() {
+
+		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		?>
+		<div class="rating-report rating-report-horizontal-graph">
+			<?php foreach ( $this->ratings as $key => $value ) :
+				$percentage = round( ( $value['rating'] / $this->maximum_rating ) * 100 );
+				?>
+				<div class="rating-report-category rating-report-category-<?php echo strtolower( sanitize_html_class( $value['category'] ) ); ?>">
+					<div class="rating-report-category-heading">
+						<div class="rating-report-category-name">
+							<?php echo esc_html( sprintf( '%s - %s/%s', $value['category'], $value['rating'], $this->maximum_rating ) ); ?>
+						</div>
+
+						<?php if ( ! empty( $value['description'] ) ) : ?>
+							<div class="rating-report-category-description">
+								<?php echo wpautop( $value['description'] ); ?>
+							</div>
+						<?php endif; ?>
+					</div>
+					<div class="rating-report-bar-wrap">
+						<div class="rating-report-bar" style="width: <?php echo absint( $percentage ); ?>%;"></div>
+					</div>
+					<?php if ( $show_numbers ) : ?>
+						<span class="rating-report-bar-number"><?php echo esc_html( $value['rating'] ); ?></span>
+					<?php endif; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Render Vertical Graph
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
+	public function render_vertical_graph() {
+
+		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		?>
+		<div class="rating-report rating-report-vertical-graph rating-report-graph-values">
+			<?php foreach ( $this->ratings as $key => $value ) :
+				$percentage = round( ( $value['rating'] / $this->maximum_rating ) * 100 );
+				?>
+				<div class="rating-report-category rating-report-category-<?php echo strtolower( sanitize_html_class( $value['category'] ) ); ?>">
+					<div class="rating-report-bar" style="height: <?php echo absint( $percentage ); ?>%;"></div>
+					<?php if ( $show_numbers ) : ?>
+						<span class="rating-report-bar-number"><?php echo esc_html( $value['rating'] ); ?></span>
+					<?php endif; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="rating-report rating-report-vertical-graph rating-report-graph-labels">
+			<?php foreach ( $this->ratings as $key => $value ) : ?>
+				<div class="rating-report-category rating-report-category-<?php echo strtolower( sanitize_html_class( $value['category'] ) ); ?>">
+					<div class="rating-report-category-name">
+						<?php echo esc_html( $value['category'] ); ?>
+					</div>
+
+					<?php if ( ! empty( $value['description'] ) ) : ?>
+						<div class="rating-report-category-description">
+							<?php echo wpautop( $value['description'] ); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<?php
+
+	}
+
 	/**
 	 * Render Graph Report
 	 *
@@ -458,6 +533,12 @@ class Rating_Report_Card {
 					<div class="rating-report-category-name">
 						<?php echo esc_html( $value['category'] ); ?>
 					</div>
+
+					<?php if ( ! empty( $value['description'] ) ) : ?>
+						<div class="rating-report-category-description">
+							<?php echo wpautop( $value['description'] ); ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			<?php endforeach; ?>
 		</div>

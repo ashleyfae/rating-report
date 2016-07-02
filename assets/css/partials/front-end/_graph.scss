@@ -1,11 +1,27 @@
-.rating-report-graph {
-    display: flex;
+.rating-report-graph-values {
     height: 300px;
+
+    .rating-report-category {
+        background: #eee;
+    }
+}
+
+.rating-report-vertical-graph {
+    display: flex;
     justify-content: space-between;
 
     .rating-report-category {
         position: relative;
         width: 17%;
+        vertical-align: bottom;
+    }
+
+    .rating-report-bar {
+        max-height: 300px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
         vertical-align: bottom;
     }
 }
@@ -24,12 +40,7 @@
 
 .rating-report-bar {
     background: #3CB2D2;
-    max-height: 300px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    vertical-align: bottom;
+
 }
 
 .rating-report-bar-number {
@@ -45,4 +56,39 @@
     max-width: 100%;
     width: 100%;
     text-align: center;
+}
+
+.rating-report-category-name {
+    font: {
+        weight: bold;
+    }
+}
+
+.rating-report-category-description {
+
+}
+
+.rating-report-horizontal-graph {
+    border: 1px solid #eee;
+    margin: 2em 0;
+
+    .rating-report-category {
+        border-top: 1px solid #eee;
+        padding: 1em;
+        margin-bottom: 1em;
+
+        &:first-child {
+            border: none;
+        }
+    }
+
+    .rating-report-bar {
+        height: 30px;
+    }
+
+    .rating-report-bar-wrap {
+        background: #eee;
+        height: 30px;
+        width: 100%;
+    }
 }

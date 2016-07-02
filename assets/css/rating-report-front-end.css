@@ -1,10 +1,21 @@
-.rating-report-graph {
+.rating-report-graph-values {
+  height: 300px; }
+  .rating-report-graph-values .rating-report-category {
+    background: #eee; }
+
+.rating-report-vertical-graph {
   display: flex;
-  height: 300px;
   justify-content: space-between; }
-  .rating-report-graph .rating-report-category {
+  .rating-report-vertical-graph .rating-report-category {
     position: relative;
     width: 17%;
+    vertical-align: bottom; }
+  .rating-report-vertical-graph .rating-report-bar {
+    max-height: 300px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     vertical-align: bottom; }
 
 .rating-report-graph-values {
@@ -16,13 +27,7 @@
     text-align: center; }
 
 .rating-report-bar {
-  background: #3CB2D2;
-  max-height: 300px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  vertical-align: bottom; }
+  background: #3CB2D2; }
 
 .rating-report-bar-number {
   color: white;
@@ -35,5 +40,24 @@
   max-width: 100%;
   width: 100%;
   text-align: center; }
+
+.rating-report-category-name {
+  font-weight: bold; }
+
+.rating-report-horizontal-graph {
+  border: 1px solid #eee;
+  margin: 2em 0; }
+  .rating-report-horizontal-graph .rating-report-category {
+    border-top: 1px solid #eee;
+    padding: 1em;
+    margin-bottom: 1em; }
+    .rating-report-horizontal-graph .rating-report-category:first-child {
+      border: none; }
+  .rating-report-horizontal-graph .rating-report-bar {
+    height: 30px; }
+  .rating-report-horizontal-graph .rating-report-bar-wrap {
+    background: #eee;
+    height: 30px;
+    width: 100%; }
 
 /*# sourceMappingURL=rating-report-front-end.css.map */

@@ -28,6 +28,15 @@ class Rating_Report_Card {
 	private $post;
 
 	/**
+	 * Rating Report Settings
+	 *
+	 * @var array
+	 * @access private
+	 * @since  1.0
+	 */
+	private $settings;
+
+	/**
 	 * Card type ('graph' or 'table')
 	 *
 	 * @var string
@@ -81,6 +90,13 @@ class Rating_Report_Card {
 	 */
 	private $rating_scale;
 
+	/**
+	 * Maximum Rating
+	 *
+	 * @var int
+	 * @access private
+	 * @since  1.0
+	 */
 	private $maximum_rating;
 
 	/**
@@ -104,13 +120,40 @@ class Rating_Report_Card {
 	 */
 	public function __construct( $post_id = 0, $type = '' ) {
 
-		$this->ID   = $post_id;
-		$this->post = get_post( $post_id );
+		$this->ID       = $post_id;
+		$this->post     = get_post( $post_id );
+		$this->settings = rating_report_get_settings();
 		$this->set_type( $type );
-		$this->rating_type    = rating_report_get_option( 'rating_type', 'numbers' );
+		$this->rating_type    = $this->get_setting( 'rating_type', 'numbers' );
 		$this->rating_scale   = rating_report_get_rating_scale();
-		$this->half_stars     = rating_report_get_option( 'half_stars', false );
-		$this->maximum_rating = rating_report_get_option( 'max_rating', 5 );
+		$this->half_stars     = $this->get_setting( 'half_stars', false );
+		$this->maximum_rating = $this->get_setting( 'max_rating', 5 );
+
+	}
+
+	/**
+	 * Get Setting
+	 *
+	 * Retrieves an option from the Rating Report settings.
+	 *
+	 * @param string $key
+	 * @param bool   $default
+	 *
+	 * @access private
+	 * @since  1.0
+	 * @return bool|mixed
+	 */
+	private function get_setting( $key = '', $default = false ) {
+
+		if ( ! is_array( $this->settings ) ) {
+			return $default;
+		}
+
+		if ( ! array_key_exists( $key, $this->settings ) || empty( $this->settings[ $key ] ) ) {
+			return $default;
+		}
+
+		return $this->settings[ $key ];
 
 	}
 
@@ -157,10 +200,11 @@ class Rating_Report_Card {
 	public function get_formatted_average_rating() {
 
 		$average_rating = $this->get_average_rating();
-		$display_type   = rating_report_get_option( 'rating_type_overall', 'numbers' );
+		$display_type   = $this->get_setting( 'rating_type_overall', 'numbers' );
 
 		if ( $display_type == 'numbers' ) {
-			$final_rating = $average_rating;
+			$rating_template = $this->get_setting( 'table_category_rating_template', __( '%s stars', 'rating-report' ) );
+			$final_rating    = sprintf( $rating_template, $average_rating );
 		} else {
 			// First we need to round the number.
 			$rounded_value = $this->half_stars ? ( floor( $average_rating * 2 ) / 2 ) : round( $average_rating );
@@ -186,7 +230,7 @@ class Rating_Report_Card {
 	 */
 	public function set_type( $type = '' ) {
 
-		$type       = ! empty( $type ) ? $type : rating_report_get_option( 'display_type', 'table' );
+		$type       = ! empty( $type ) ? $type : $this->get_setting( 'display_type', 'table' );
 		$this->type = apply_filters( 'rating-report/card/set-type', $type );
 
 		return $this->type;
@@ -207,7 +251,8 @@ class Rating_Report_Card {
 	public function get_rating( $value ) {
 
 		if ( $this->rating_type == 'numbers' ) {
-			$rating = $value;
+			$rating_template = $this->get_setting( 'table_category_rating_template', __( '%s stars', 'rating-report' ) );
+			$rating          = sprintf( $rating_template, $value );
 		} else {
 			$rating = call_user_func( array( $this, 'get_' . $this->rating_type . '_rating' ), $value );
 		}
@@ -229,9 +274,9 @@ class Rating_Report_Card {
 	 */
 	public function get_images_rating( $value ) {
 
-		$empty_star_id = rating_report_get_option( 'empty_star' );
-		$half_star_id  = rating_report_get_option( 'half_star' );
-		$full_star_id  = rating_report_get_option( 'full_star' );
+		$empty_star_id = $this->get_setting( 'empty_star' );
+		$half_star_id  = $this->get_setting( 'half_star' );
+		$full_star_id  = $this->get_setting( 'full_star' );
 
 		if ( empty( $full_star_id ) ) {
 			return false;
@@ -329,7 +374,7 @@ class Rating_Report_Card {
 			$this->descriptions = apply_filters( 'rating-report/card/descriptions', $descriptions, $this );
 		}
 
-		$categories = rating_report_get_option( 'categories', rating_report_get_default_categories() );
+		$categories = $this->get_setting( 'categories', rating_report_get_default_categories() );
 
 		$final_array   = array();
 		$total_ratings = 0;
@@ -388,7 +433,7 @@ class Rating_Report_Card {
 			<thead>
 			<tr>
 				<th colspan="2">
-					<?php echo esc_html( rating_report_get_option( 'table_title', __( 'Rating Report', 'rating-report' ) ) ); ?>
+					<?php echo esc_html( $this->get_setting( 'table_title', __( 'Rating Report', 'rating-report' ) ) ); ?>
 				</th>
 			</tr>
 			</thead>
@@ -417,7 +462,7 @@ class Rating_Report_Card {
 			<tfoot>
 			<tr class="rating-report-overall">
 				<td class="rating-report-overall-label">
-					<?php echo esc_html( rating_report_get_option( 'table_overall_label', __( 'Overall', 'rating-report' ) ) ); ?>
+					<?php echo esc_html( $this->get_setting( 'table_overall_label', __( 'Overall', 'rating-report' ) ) ); ?>
 				</td>
 				<td class="rating-report-overall-rating">
 					<?php echo $this->get_formatted_average_rating(); ?>
@@ -429,9 +474,16 @@ class Rating_Report_Card {
 
 	}
 
+	/**
+	 * Render Horzontal Graph
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
 	public function render_horizontal_graph() {
 
-		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		$show_numbers = $this->get_setting( 'show_numbers', false );
 		?>
 		<div class="rating-report rating-report-horizontal-graph">
 			<?php foreach ( $this->ratings as $key => $value ) :
@@ -471,7 +523,7 @@ class Rating_Report_Card {
 	 */
 	public function render_vertical_graph() {
 
-		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		$show_numbers = $this->get_setting( 'show_numbers', false );
 		?>
 		<div class="rating-report rating-report-vertical-graph rating-report-graph-values">
 			<?php foreach ( $this->ratings as $key => $value ) :
@@ -513,7 +565,7 @@ class Rating_Report_Card {
 	 */
 	public function render_graph() {
 
-		$show_numbers = rating_report_get_option( 'show_numbers', false );
+		$show_numbers = $this->get_setting( 'show_numbers', false );
 		?>
 		<div class="rating-report rating-report-graph rating-report-graph-values">
 			<?php foreach ( $this->ratings as $key => $value ) :

@@ -46,13 +46,35 @@ class Rating_Report_Card {
 	private $type;
 
 	/**
+	 * Array of Categories
+	 *
+	 * @var array
+	 * @access private
+	 * @since  1.0
+	 */
+	private $categories;
+
+	/**
 	 * Ratings
+	 *
+	 * Compiled multi-dimensional array of category names, ratings, and descriptions.
 	 *
 	 * @var array
 	 * @access private
 	 * @since  1.0
 	 */
 	private $ratings;
+
+	/**
+	 * Numbers
+	 *
+	 * Array of rating numbers.
+	 *
+	 * @var array
+	 * @access private
+	 * @since  1.0
+	 */
+	private $numbers;
 
 	/**
 	 * Descriptions
@@ -124,6 +146,7 @@ class Rating_Report_Card {
 		$this->post     = get_post( $post_id );
 		$this->settings = rating_report_get_settings();
 		$this->set_type( $type );
+		$this->set_categories( $this->get_setting( 'categories', rating_report_get_default_categories() ) );
 		$this->rating_type    = $this->get_setting( 'rating_type', 'numbers' );
 		$this->rating_scale   = rating_report_get_rating_scale();
 		$this->half_stars     = $this->get_setting( 'half_stars', false );
@@ -238,6 +261,21 @@ class Rating_Report_Card {
 	}
 
 	/**
+	 * Set Categories
+	 *
+	 * @param array $categories
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
+	public function set_categories( $categories = array() ) {
+
+		$this->categories = $categories;
+
+	}
+
+	/**
 	 * Get Rating
 	 *
 	 * Returns the display format for a single rating value.
@@ -348,52 +386,74 @@ class Rating_Report_Card {
 	}
 
 	/**
+	 * Set Numbers
+	 *
+	 * @param array $numbers
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
+	public function set_numbers( $numbers = array() ) {
+		$this->numbers = $numbers;
+	}
+
+	/**
+	 * Set Descriptions
+	 *
+	 * @param array $descriptions
+	 *
+	 * @access public
+	 * @since  1.0
+	 * @return void
+	 */
+	public function set_descriptions( $descriptions = array() ) {
+		$this->descriptions = $descriptions;
+	}
+
+	/**
 	 * Set Ratings
 	 *
 	 * Leave the $ratings parameter blank to auto fetch the ratings from the post meta.
 	 * This parameter exists so you can manually pass in an array of ratings for some reason.
 	 * i.e. : $ratings = array( 1, 5, 2, 6 )
 	 *
-	 * @param null|array $ratings      If omitted, we look up the ratings ourselves.
-	 * @param null|array $descriptions If omitted, we look up the descriptions ourselves.
-	 *
 	 * @access public
 	 * @since  1.0
 	 * @return array
 	 */
-	public function set_ratings( $ratings = null, $descriptions = null ) {
+	public function set_ratings() {
 
-		if ( empty( $ratings ) ) {
-			$ratings = get_post_meta( $this->ID, 'rating_report', true );
-			$ratings = is_array( $ratings ) ? $ratings : array();
+		if ( ! isset( $this->numbers ) || ! is_array( $this->numbers ) ) {
+			$numbers       = get_post_meta( $this->ID, 'rating_report', true );
+			$numbers       = is_array( $numbers ) ? $numbers : array();
+			$this->numbers = apply_filters( 'rating-report/card/numbers', $numbers, $this );
 		}
 
-		if ( empty( $descriptions ) ) {
+		if ( ! isset( $this->descriptions ) || ! is_array( $this->descriptions ) ) {
 			$descriptions       = get_post_meta( $this->ID, 'rating_report_descriptions', true );
 			$descriptions       = is_array( $descriptions ) ? $descriptions : array();
 			$this->descriptions = apply_filters( 'rating-report/card/descriptions', $descriptions, $this );
 		}
 
-		$categories = $this->get_setting( 'categories', rating_report_get_default_categories() );
-
 		$final_array   = array();
 		$total_ratings = 0;
 
-		foreach ( $categories as $key => $name ) {
-			if ( ! array_key_exists( $key, $ratings ) ) {
+		foreach ( $this->categories as $key => $name ) {
+			if ( ! array_key_exists( $key, $this->numbers ) ) {
 				continue;
 			}
 
 			$final_array[] = array(
 				'category'    => esc_html( $name ),
-				'rating'      => $ratings[ $key ],
+				'rating'      => $this->numbers[ $key ],
 				'description' => array_key_exists( $key, $this->descriptions ) ? $this->descriptions[ $key ] : ''
 			);
 
-			$total_ratings += $ratings[ $key ];
+			$total_ratings += $this->numbers[ $key ];
 		}
 
-		$this->ratings = apply_filters( 'rating-report/card/set-ratings', $final_array, $ratings, $categories );
+		$this->ratings = apply_filters( 'rating-report/card/set-ratings', $final_array, $this->numbers, $this->categories );
 
 		// Figure out the average rating.
 		$average_rating       = $total_ratings / count( $this->ratings );

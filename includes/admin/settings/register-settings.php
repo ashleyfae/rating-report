@@ -345,7 +345,7 @@ function rating_report_get_registered_settings() {
 				'rating_type'         => array(
 					'id'      => 'rating_type',
 					'name'    => esc_html__( 'Rating Type (Categories)', 'rating-report' ),
-					'desc'    => sprintf( __( 'What type of ratings to show on the table. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
+					'desc'    => sprintf( __( 'What type of ratings to show on the table. Only applies to "Table" style. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
 					'type'    => 'select',
 					'std'     => 'numbers',
 					'options' => array(
@@ -357,7 +357,7 @@ function rating_report_get_registered_settings() {
 				'rating_type_overall' => array(
 					'id'      => 'rating_type_overall',
 					'name'    => esc_html__( 'Rating Type (Overall)', 'rating-report' ),
-					'desc'    => sprintf( __( 'What type of ratings to show on the table. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>. Note that if you choose Images or Font Awesome Stars, the overall rating will be rounded to the nearest whole or half number (depending on whether or not you support half stars). The Number option will show an accurate decimal.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
+					'desc'    => sprintf( __( 'What type of ratings to show on the table. Only applies to "Table" style. If you choose graphics, be sure to <a href="%s">choose your star graphics</a>. Note that if you choose Images or Font Awesome Stars, the overall rating will be rounded to the nearest whole or half number (depending on whether or not you support half stars). The Number option will show an accurate decimal.', 'rating-report' ), esc_url( admin_url( 'options-general.php?page=rating-report&tab=ratings&section=graphics' ) ) ),
 					'type'    => 'select',
 					'std'     => 'numbers',
 					'options' => array(

@@ -46,6 +46,15 @@ class Rating_Report_Card {
 	private $ratings;
 
 	/**
+	 * Descriptions
+	 *
+	 * @var array
+	 * @access private
+	 * @since  1.0
+	 */
+	private $descriptions;
+
+	/**
 	 * Average Rating
 	 *
 	 * @var int|float
@@ -210,7 +219,7 @@ class Rating_Report_Card {
 	/**
 	 * Get Graphical Stars
 	 *
-	 * @uses Rating_Report_Card::create_star_rating()
+	 * @uses   Rating_Report_Card::create_star_rating()
 	 *
 	 * @param int|float $value Numerical rating value
 	 *
@@ -241,7 +250,7 @@ class Rating_Report_Card {
 	/**
 	 * Get Font Awesome Stars
 	 *
-	 * @uses Rating_Report_Card::create_star_rating()
+	 * @uses   Rating_Report_Card::create_star_rating()
 	 *
 	 * @param int|float $value Numerical rating value
 	 *
@@ -300,17 +309,24 @@ class Rating_Report_Card {
 	 * This parameter exists so you can manually pass in an array of ratings for some reason.
 	 * i.e. : $ratings = array( 1, 5, 2, 6 )
 	 *
-	 * @param null|array $ratings
+	 * @param null|array $ratings      If omitted, we look up the ratings ourselves.
+	 * @param null|array $descriptions If omitted, we look up the descriptions ourselves.
 	 *
 	 * @access public
 	 * @since  1.0
 	 * @return array
 	 */
-	public function set_ratings( $ratings = null ) {
+	public function set_ratings( $ratings = null, $descriptions = null ) {
 
 		if ( empty( $ratings ) ) {
 			$ratings = get_post_meta( $this->ID, 'rating_report', true );
 			$ratings = is_array( $ratings ) ? $ratings : array();
+		}
+
+		if ( empty( $descriptions ) ) {
+			$descriptions       = get_post_meta( $this->ID, 'rating_report_descriptions', true );
+			$descriptions       = is_array( $descriptions ) ? $descriptions : array();
+			$this->descriptions = apply_filters( 'rating-report/card/descriptions', $descriptions, $this );
 		}
 
 		$categories = rating_report_get_option( 'categories', rating_report_get_default_categories() );
@@ -324,8 +340,9 @@ class Rating_Report_Card {
 			}
 
 			$final_array[] = array(
-				'category' => esc_html( $name ),
-				'rating'   => $ratings[ $key ]
+				'category'    => esc_html( $name ),
+				'rating'      => $ratings[ $key ],
+				'description' => array_key_exists( $key, $this->descriptions ) ? $this->descriptions[ $key ] : ''
 			);
 
 			$total_ratings += $ratings[ $key ];
@@ -382,7 +399,14 @@ class Rating_Report_Card {
 				?>
 				<tr>
 					<td class="rating-report-category">
-						<?php echo esc_html( $value['category'] ); ?>
+						<div class="rating-report-category-name">
+							<?php echo esc_html( $value['category'] ); ?>
+						</div>
+						<?php if ( ! empty( $value['description'] ) ) : ?>
+							<div class="rating-report-category-description">
+								<?php echo wpautop( $value['description'] ); ?>
+							</div>
+						<?php endif; ?>
 					</td>
 					<td class="rating-report-rating rating-report-rating-<?php echo sanitize_html_class( $rating_class ); ?>">
 						<?php echo $this->get_rating( $value['rating'] ); ?>

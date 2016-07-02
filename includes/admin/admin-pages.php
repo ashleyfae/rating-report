@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return void
  */
 function rating_report_add_options_link() {
-	$rating_report_settings_page = add_submenu_page( 'options-general.php', __( 'Rating Report Settings', 'rating-report' ), __( 'Rating Report', 'rating-report' ), 'manage_options', 'rating-report', 'rating_report_options_page' );
+	add_submenu_page( 'options-general.php', __( 'Rating Report Settings', 'rating-report' ), __( 'Rating Report', 'rating-report' ), 'manage_options', 'rating-report', 'rating_report_options_page' );
 }
 
 add_action( 'admin_menu', 'rating_report_add_options_link', 10 );

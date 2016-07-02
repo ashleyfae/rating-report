@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! class_exists( 'Rating_Report' ) ) :
-	
+
 	class Rating_Report {
 
 		/**
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 */
 		public function __clone() {
 			// Cloning instances of the class is forbidden.
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'rating-report' ), '1.0' );
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'rating-report' ), '2.0' );
 		}
 
 		/**
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 */
 		public function __wakeup() {
 			// Unserializing instances of the class is forbidden.
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'rating-report' ), '1.0' );
+			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'rating-report' ), '2.0' );
 		}
 
 		/**
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 
 			// Plugin version.
 			if ( ! defined( 'RATING_REPORT_VERSION' ) ) {
-				define( 'RATING_REPORT_VERSION', '1.0.0' );
+				define( 'RATING_REPORT_VERSION', '2.0' );
 			}
 
 			// Plugin Folder Path.
@@ -152,22 +152,20 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 			if ( empty( $rating_report_options ) ) {
 				$rating_report_options = rating_report_get_settings();
 			}
-			
+
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/class-rating-report-card.php';
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/functions.php';
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/load-assets.php';
 			require_once RATING_REPORT_PLUGIN_DIR . 'includes/shortcodes.php';
 
 			if ( is_admin() ) {
-				//require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/admin-actions.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/admin-pages.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/class-rr-notices.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/meta-box.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/sanitize-meta-fields.php';
+				require_once RATING_REPORT_PLUGIN_DIR . 'includes/upgrades/upgrade-functions.php';
 			}
-
-			//require_once RATING_REPORT_PLUGIN_DIR . 'includes/install.php';
 
 		}
 
@@ -185,7 +183,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 			load_plugin_textdomain( 'rating-report', false, $lang_dir );
 
 		}
-		
+
 	}
 
 endif;

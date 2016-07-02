@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Creates admin submenu pages under 'Books'.
+ * Creates admin submenu pages under 'Settings'.
  *
  * @since 1.0.0
  * @return void

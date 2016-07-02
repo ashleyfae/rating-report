@@ -130,26 +130,21 @@ function rating_report_save_meta( $post_id, $post ) {
 	 * Okay now we can save.
 	 */
 
-	$fields     = array();
-	$categories = rating_report_get_option( 'categories', rating_report_get_default_categories() );
-
-	foreach ( $categories as $key => $name ) {
-		$number   = ( $key + 1 );
-		$fields[] = '_ratingr_section_' . $number;
-	}
-
-	$fields = array( 'rating_report' );
+	$fields = array(
+		'rating_report',
+		'rating_report_descriptions'
+	);
 
 	foreach ( apply_filters( 'rating-report/meta-box/saved-fields', $fields ) as $field ) {
 		if ( ! empty( $_POST[ $field ] ) ) {
-			$sanitized_value = apply_filters( 'rating-report/meta-box/sanitize', $_POST[ $field ], $field ); // @see rating_report_sanitize_meta()
+			$sanitized_value = apply_filters( 'rating-report/meta-box/sanitize/' . $field, $_POST[ $field ] ); // @see rating_report_sanitize_meta()
 			update_post_meta( $post_id, $field, $sanitized_value );
 		} else {
 			delete_post_meta( $post_id, $field );
 		}
 	}
 
-	do_action( 'novelist/meta-box/save', $post_id, $post );
+	do_action( 'rating-report/meta-box/save', $post_id, $post );
 
 }
 

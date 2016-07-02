@@ -13,7 +13,7 @@
  * @param array       $atts
  * @param null|string $content
  *
- * @since 1.0
+ * @since 2.0
  * @return string
  */
 function rating_report_shortcode( $atts, $content = null ) {

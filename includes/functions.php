@@ -10,7 +10,7 @@
 /**
  * Get Default Categories
  *
- * @since 1.0
+ * @since 2.0
  * @return array
  */
 function rating_report_get_default_categories() {
@@ -31,7 +31,7 @@ function rating_report_get_default_categories() {
  * Returns an array of available ratings. Array keys are the rating number
  * and values are the string name (ie "4.5 Stars).
  *
- * @since 1.0
+ * @since 2.0
  * @return array
  */
 function rating_report_get_rating_scale() {

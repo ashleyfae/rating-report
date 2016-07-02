@@ -10,7 +10,7 @@
 /**
  * Register front-end stylesheet.
  *
- * @since 1.0.0
+ * @since 2.0
  * @return void
  */
 function rating_report_register_styles() {
@@ -48,7 +48,7 @@ add_action( 'wp_enqueue_scripts', 'rating_report_register_styles' );
 /**
  * Generate CSS based on style settings.
  *
- * @since 1.0
+ * @since 2.0
  * @return string
  */
 function rating_report_generate_css() {

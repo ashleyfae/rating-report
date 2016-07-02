@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Register all the meta boxes for the post custom post type
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_add_meta_box() {
@@ -35,7 +35,7 @@ add_action( 'add_meta_boxes', 'rating_report_add_meta_box' );
  *
  * @see   rating_report_render_rating_fields()
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_render_meta_box( $post ) {
@@ -49,7 +49,7 @@ function rating_report_render_meta_box( $post ) {
  *
  * @param WP_Post $post
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_render_rating_fields( $post ) {
@@ -101,7 +101,7 @@ add_action( 'rating-report/meta-box/render', 'rating_report_render_rating_fields
  * @param int     $post_id ID of the book being saved
  * @param WP_Post $post    Object of the book being saved
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_save_meta( $post_id, $post ) {

@@ -16,7 +16,7 @@
  *
  * @param mixed $ratings
  *
- * @since 1.0
+ * @since 2.0
  * @return array
  */
 function rating_report_sanitize_ratings( $ratings ) {
@@ -35,7 +35,7 @@ add_filter( 'rating-report/meta-box/sanitize/rating_report', 'rating_report_sani
  *
  * @param mixed $value
  *
- * @since 1.0
+ * @since 2.0
  * @return float|int|string
  */
 function rating_report_sanitize_rating_number( $value ) {
@@ -60,7 +60,7 @@ function rating_report_sanitize_rating_number( $value ) {
  *
  * @param mixed $descriptions
  *
- * @since 1.0.0
+ * @since 2.0
  * @return array
  */
 function rating_report_sanitize_descriptons( $descriptions ) {

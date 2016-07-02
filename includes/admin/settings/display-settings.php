@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Renders the options page contents.
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_options_page() {

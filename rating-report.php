@@ -3,7 +3,7 @@
  * Plugin Name: Rating Report
  * Plugin URI: https://shop.nosegraze.com/product/rating-report/
  * Description: Generate a rating report card based on different criteria.
- * Version: 1.0
+ * Version: 2.0
  * Author: Nose Graze
  * Author URI: https://www.nosegraze.com
  * License: GPL2
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * Rating_Report object
 		 *
 		 * @var Rating_Report Instance of the Rating_Report class.
-		 * @since 1.0
+		 * @since 2.0
 		 */
 		private static $instance;
 
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * @uses   Rating_Report::load_textdomain() Load the language files.
 		 *
 		 * @access public
-		 * @since  1.0
+		 * @since  2.0
 		 * @return Rating_Report Instance of Rating_Report class
 		 */
 		public static function instance() {
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * object therefore, we don't want the object to be cloned.
 		 *
 		 * @access protected
-		 * @since  1.0
+		 * @since  2.0
 		 * @return void
 		 */
 		public function __clone() {
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * Disable unserializing of the class.
 		 *
 		 * @access protected
-		 * @since  1.0
+		 * @since  2.0
 		 * @return void
 		 */
 		public function __wakeup() {
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * Setup plugin constants.
 		 *
 		 * @access private
-		 * @since  1.0
+		 * @since  2.0
 		 * @return void
 		 */
 		private function setup_constants() {
@@ -140,7 +140,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * Include Required Files
 		 *
 		 * @access private
-		 * @since  1.0
+		 * @since  2.0
 		 * @return void
 		 */
 		private function includes() {
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 		 * Loads the plugin language files.
 		 *
 		 * @access public
-		 * @since  1.0
+		 * @since  2.0
 		 * @return void
 		 */
 		public function load_textdomain() {
@@ -195,7 +195,7 @@ endif;
  *
  * This function returns an instance of the Rating_Report class.
  *
- * @since 1.0
+ * @since 2.0
  * @return Rating_Report
  */
 function Rating_Report() {

@@ -14,7 +14,7 @@ class Rating_Report_Card {
 	 *
 	 * @var int
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	public $ID = 0;
 
@@ -23,7 +23,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array|null|WP_Post
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $post;
 
@@ -32,7 +32,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $settings;
 
@@ -41,7 +41,7 @@ class Rating_Report_Card {
 	 *
 	 * @var string
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $type;
 
@@ -50,7 +50,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $categories;
 
@@ -61,7 +61,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $ratings;
 
@@ -72,7 +72,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $numbers;
 
@@ -81,7 +81,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $descriptions;
 
@@ -90,7 +90,7 @@ class Rating_Report_Card {
 	 *
 	 * @var int|float
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $average_rating;
 
@@ -99,7 +99,7 @@ class Rating_Report_Card {
 	 *
 	 * @var string
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $rating_type;
 
@@ -108,7 +108,7 @@ class Rating_Report_Card {
 	 *
 	 * @var array
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $rating_scale;
 
@@ -117,7 +117,7 @@ class Rating_Report_Card {
 	 *
 	 * @var int
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $maximum_rating;
 
@@ -126,7 +126,7 @@ class Rating_Report_Card {
 	 *
 	 * @var bool
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 */
 	private $half_stars;
 
@@ -137,7 +137,7 @@ class Rating_Report_Card {
 	 * @param string $type    Card type
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function __construct( $post_id = 0, $type = '' ) {
@@ -163,7 +163,7 @@ class Rating_Report_Card {
 	 * @param bool   $default
 	 *
 	 * @access private
-	 * @since  1.0
+	 * @since  2.0
 	 * @return bool|mixed
 	 */
 	private function get_setting( $key = '', $default = false ) {
@@ -184,7 +184,7 @@ class Rating_Report_Card {
 	 * Get Type
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function get_type() {
@@ -197,7 +197,7 @@ class Rating_Report_Card {
 	 * Get Average Rating
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return int|float
 	 */
 	public function get_average_rating() {
@@ -217,7 +217,7 @@ class Rating_Report_Card {
 	 * @uses   get_average_rating()
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function get_formatted_average_rating() {
@@ -248,7 +248,7 @@ class Rating_Report_Card {
 	 * @param string $type
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function set_type( $type = '' ) {
@@ -266,7 +266,7 @@ class Rating_Report_Card {
 	 * @param array $categories
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function set_categories( $categories = array() ) {
@@ -283,7 +283,7 @@ class Rating_Report_Card {
 	 * @param int|float $value Numerical rating value
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function get_rating( $value ) {
@@ -307,7 +307,7 @@ class Rating_Report_Card {
 	 * @param int|float $value Numerical rating value
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string|bool False on failure
 	 */
 	public function get_images_rating( $value ) {
@@ -338,7 +338,7 @@ class Rating_Report_Card {
 	 * @param int|float $value Numerical rating value
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function get_font_awesome_rating( $value ) {
@@ -366,7 +366,7 @@ class Rating_Report_Card {
 	 * @param string $empty_star_html HTML to repeat until we reach maximum rating
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function create_star_rating( $rating = 5, $full_star_html = '', $half_star_html = '', $empty_star_html = '' ) {
@@ -391,7 +391,7 @@ class Rating_Report_Card {
 	 * @param array $numbers
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function set_numbers( $numbers = array() ) {
@@ -404,7 +404,7 @@ class Rating_Report_Card {
 	 * @param array $descriptions
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function set_descriptions( $descriptions = array() ) {
@@ -419,7 +419,7 @@ class Rating_Report_Card {
 	 * i.e. : $ratings = array( 1, 5, 2, 6 )
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return array
 	 */
 	public function set_ratings() {
@@ -467,7 +467,7 @@ class Rating_Report_Card {
 	 * Render Rating Report
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return string
 	 */
 	public function render() {
@@ -483,7 +483,7 @@ class Rating_Report_Card {
 	 * Render Table Report
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function render_table() {
@@ -538,7 +538,7 @@ class Rating_Report_Card {
 	 * Render Horzontal Graph
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function render_horizontal_graph() {
@@ -578,7 +578,7 @@ class Rating_Report_Card {
 	 * Render Vertical Graph
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function render_vertical_graph() {
@@ -620,7 +620,7 @@ class Rating_Report_Card {
 	 * Render Graph Report
 	 *
 	 * @access public
-	 * @since  1.0
+	 * @since  2.0
 	 * @return void
 	 */
 	public function render_graph() {

@@ -32,5 +32,5 @@ TK
 
 == Changelog ==
 
-= 1.0.0 - 13 April 2016 =
+= 2.0 - 13 April 2016 =
 * Initial release.

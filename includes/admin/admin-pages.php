@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Creates admin submenu pages under 'Settings'.
  *
- * @since 1.0.0
+ * @since 2.0
  * @return void
  */
 function rating_report_add_options_link() {
@@ -31,7 +31,7 @@ add_action( 'admin_menu', 'rating_report_add_options_link', 10 );
  *
  * Checks whether or not the current page is a Novelist admin page.
  *
- * @since 1.0
+ * @since 2.0
  * @return bool
  */
 function rating_report_is_admin_page() {
@@ -56,7 +56,7 @@ function rating_report_is_admin_page() {
  *
  * @param string $hook Currently loaded page
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_load_admin_scripts( $hook ) {

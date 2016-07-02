@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @global       $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return mixed
  */
 function rating_report_get_option( $key = '', $default = false ) {
@@ -47,7 +47,7 @@ function rating_report_get_option( $key = '', $default = false ) {
  *
  * @global       $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return bool True if updated, false if not
  */
 function rating_report_update_option( $key = '', $value = false ) {
@@ -90,7 +90,7 @@ function rating_report_update_option( $key = '', $value = false ) {
  *
  * @global       $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return boolean True if updated, false if not.
  */
 function rating_report_delete_option( $key = '' ) {
@@ -123,7 +123,7 @@ function rating_report_delete_option( $key = '' ) {
  *
  * Retrieves all plugin settings
  *
- * @since 1.0
+ * @since 2.0
  * @return array Rating Report settings
  */
 function rating_report_get_settings() {
@@ -135,7 +135,7 @@ function rating_report_get_settings() {
 /**
  * Add all settings sections and fields.
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_register_settings() {
@@ -203,7 +203,7 @@ add_action( 'admin_init', 'rating_report_register_settings' );
  *  + rating-report/settings/{key} - Where {key} is a specific tab. Used to modify a single tab/section.
  *  + rating-report/settings/registered-settings - Includes the entire array of all settings.
  *
- * @since 1.0
+ * @since 2.0
  * @return array
  */
 function rating_report_get_registered_settings() {
@@ -416,7 +416,7 @@ function rating_report_get_registered_settings() {
  *
  * @global array $rating_report_options Array of all the Rating Report options
  *
- * @since 1.0
+ * @since 2.0
  * @return array New, sanitized settings.
  */
 function rating_report_settings_sanitize( $input = array() ) {
@@ -479,7 +479,7 @@ function rating_report_settings_sanitize( $input = array() ) {
  * This gets displayed after the default settings have been restored and
  * the page has been redirected.
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_defaults_restored_message() {
@@ -501,7 +501,7 @@ add_action( 'admin_init', 'rating_report_defaults_restored_message' );
  *
  * Ajax callback that restores the default settings for a specific tab.
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_restore_default_settings() {
@@ -558,7 +558,7 @@ add_action( 'wp_ajax_rating_report_restore_default_settings', 'rating_report_res
  *
  * @param string $input
  *
- * @since 1.0
+ * @since 2.0
  * @return string
  */
 function rating_report_settings_sanitize_text_field( $input ) {
@@ -572,7 +572,7 @@ add_filter( 'rating-report/settings/sanitize/text', 'rating_report_settings_sani
  *
  * @param string $input
  *
- * @since 1.0
+ * @since 2.0
  * @return int
  */
 function rating_report_settings_sanitize_number_field( $input ) {
@@ -586,7 +586,7 @@ add_filter( 'rating-report/settings/sanitize/number', 'rating_report_settings_sa
  *
  * @param string $input
  *
- * @since 1.0
+ * @since 2.0
  * @return string
  */
 function rating_report_settings_sanitize_select_field( $input ) {
@@ -602,7 +602,7 @@ add_filter( 'rating-report/settings/sanitize/select', 'rating_report_settings_sa
  *
  * @param string $input
  *
- * @since 1.0
+ * @since 2.0
  * @return string
  */
 function rating_report_settings_sanitize_color_field( $input ) {
@@ -622,7 +622,7 @@ add_filter( 'rating-report/settings/sanitize/color', 'rating_report_settings_san
  *
  * @param int $input
  *
- * @since 1.0
+ * @since 2.0
  * @return int
  */
 function rating_report_settings_sanitize_image_field( $input ) {
@@ -638,7 +638,7 @@ add_filter( 'rating-report/settings/sanitize/image', 'rating_report_settings_san
  *
  * @param bool $input
  *
- * @since 1.0
+ * @since 2.0
  * @return bool
  */
 function rating_report_settings_sanitize_checkbox_field( $input ) {
@@ -652,7 +652,7 @@ add_filter( 'rating-report/settings/sanitize/checkbox', 'rating_report_settings_
  *
  * @param array $input
  *
- * @since 1.0
+ * @since 2.0
  * @return array
  */
 function rating_report_settings_sanitize_repeat_text( $input ) {
@@ -672,7 +672,7 @@ add_filter( 'rating-report/settings/sanitize/repeat_text', 'rating_report_settin
 /**
  * Retrieve settings tabs
  *
- * @since 1.0
+ * @since 2.0
  * @return array $tabs
  */
 function rating_report_get_settings_tabs() {
@@ -688,7 +688,7 @@ function rating_report_get_settings_tabs() {
 /**
  * Retrieve settings tabs
  *
- * @since 1.0
+ * @since 2.0
  * @return array $section
  */
 function rating_report_get_settings_tab_sections( $tab = false ) {
@@ -708,7 +708,7 @@ function rating_report_get_settings_tab_sections( $tab = false ) {
  * Get the settings sections for each tab
  * Uses a static to avoid running the filters on every request to this function
  *
- * @since  1.0
+ * @since  2.0
  * @return array Array of tabs and sections
  */
 function rating_report_get_registered_settings_sections() {
@@ -749,7 +749,7 @@ function rating_report_get_registered_settings_sections() {
  *
  * @param  string $key String key
  *
- * @since 1.0
+ * @since 2.0
  * @return string Sanitized key
  */
 function rating_report_sanitize_key( $key ) {
@@ -770,7 +770,7 @@ function rating_report_sanitize_key( $key ) {
  *
  * @param array $args Arguments passed by the setting
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_missing_callback( $args ) {
@@ -789,7 +789,7 @@ function rating_report_missing_callback( $args ) {
  *
  * @global array $rating_report_options Array of all the Rating Report settings
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_text_callback( $args ) {
@@ -826,7 +826,7 @@ function rating_report_text_callback( $args ) {
  *
  * @global array $rating_report_options Array of all the Rating Report settings
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_number_callback( $args ) {
@@ -862,7 +862,7 @@ function rating_report_number_callback( $args ) {
  *
  * @global array $rating_report_options Array of all the Rating Report settings
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_textarea_callback( $args ) {
@@ -888,7 +888,7 @@ function rating_report_textarea_callback( $args ) {
  *
  * @global array $rating_report_options Array of all the Rating Report settings
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_checkbox_callback( $args ) {
@@ -908,7 +908,7 @@ function rating_report_checkbox_callback( $args ) {
  *
  * @global array $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_repeat_text_callback( $args ) {
@@ -970,7 +970,7 @@ function rating_report_repeat_text_callback( $args ) {
  *
  * @global array $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_color_callback( $args ) {
@@ -996,7 +996,7 @@ function rating_report_color_callback( $args ) {
  *
  * @global array $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_select_callback( $args ) {
@@ -1024,7 +1024,7 @@ function rating_report_select_callback( $args ) {
  *
  * @global array $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_header_callback( $args ) {
@@ -1040,7 +1040,7 @@ function rating_report_header_callback( $args ) {
  *
  * @global array $rating_report_options
  *
- * @since 1.0
+ * @since 2.0
  * @return void
  */
 function rating_report_image_callback( $args ) {

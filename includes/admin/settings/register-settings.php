@@ -1075,3 +1075,170 @@ function rating_report_image_callback( $args ) {
 		<label for="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" class="desc"><?php echo wp_kses_post( $args['desc'] ); ?></label>
 	<?php endif;
 }
+
+/**
+ * Callback: License Key
+ *
+ * @param array  $args
+ *
+ * @global array $rating_report_options
+ *
+ * @since 2.0
+ * @return void
+ */
+function rating_report_license_key_callback( $args ) {
+	global $rating_report_options;
+
+	$messages = array();
+	$class    = '';
+	$license  = get_option( $args['options']['is_valid_license_option'] );
+
+	if ( isset( $rating_report_options[ $args['id'] ] ) ) {
+		$value = $rating_report_options[ $args['id'] ];
+	} else {
+		$value = isset( $args['std'] ) ? $args['std'] : '';
+	}
+
+	if ( ! empty( $license ) && is_object( $license ) ) {
+
+		if ( false === $license->success ) {
+
+			switch ( $license->error ) {
+
+				case 'expired' :
+
+					$class      = 'error';
+					$messages[] = sprintf(
+						__( 'Your license key expired on %1$s. Please <a href="%2$s" target="_blank" title="Renew your license key">renew your license key</a>.', 'rating-report' ),
+						date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
+						'https://shop.nosegraze.com/checkout/?edd_license_key=' . urlencode( $value ) . '&utm_campaign=admin&utm_source=licenses&utm_medium=expired'
+					);
+
+					$license_status = 'license-' . $class . '-notice';
+
+					break;
+
+				case 'missing' :
+
+					$class      = 'error';
+					$messages[] = sprintf(
+						__( 'Invalid license. Please <a href="%s" target="_blank" title="Visit account page">visit your account page</a> and verify it.', 'rating-report' ),
+						'https://shop.nosegraze.com/my-account/?utm_campaign=admin&utm_source=licenses&utm_medium=missing'
+					);
+
+					$license_status = 'license-' . $class . '-notice';
+
+					break;
+
+				case 'invalid' :
+				case 'site_inactive' :
+
+					$class      = 'error';
+					$messages[] = sprintf(
+						__( 'Your %1$s is not active for this URL. Please <a href="%2$s" target="_blank" title="Visit account page">visit your account page</a> to manage your license key URLs.', 'rating-report' ),
+						$args['name'],
+						'https://shop.nosegraze.com/my-account/?utm_campaign=admin&utm_source=licenses&utm_medium=invalid'
+					);
+
+					$license_status = 'license-' . $class . '-notice';
+
+					break;
+
+				case 'item_name_mismatch' :
+
+					$class      = 'error';
+					$messages[] = sprintf(
+						__( 'This is not a %s.', 'rating-report' ),
+						$args['name']
+					);
+
+					$license_status = 'license-' . $class . '-notice';
+
+					break;
+
+				case 'no_activations_left' :
+
+					$class      = 'error';
+					$messages[] = sprintf(
+						__( 'Your license key has reached its activation limit. <a href="%s" target="_blank" title="View upgrades">View possible upgrades.</a>', 'rating-report' ),
+						'https://shop.nosegraze.com/my-account/?utm_campaign=admin&utm_source=licenses&utm_medium=no_activations_left'
+					);
+
+					$license_status = 'license-' . $class . '-notice';
+
+					break;
+
+			}
+
+		} else {
+
+			$class      = 'valid';
+			$now        = current_time( 'timestamp' );
+			$expiration = strtotime( $license->expires, current_time( 'timestamp' ) );
+
+			if ( 'lifetime' === $license->expires ) {
+
+				$messages[]     = __( 'License key never expires.', 'rating-report' );
+				$license_status = 'license-lifetime-notice';
+
+			} elseif ( $expiration > $now && $expiration - $now < ( DAY_IN_SECONDS * 30 ) ) {
+
+				$messages[] = sprintf(
+					__( 'Your license key is about to expire! It expires on %1$s. <a href="%2$s" target="_blank" title="Renew license key">Renew your license key</a> to continue getting updates and support.', 'rating-report' ),
+					date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) ),
+					'https://shop.nosegraze.com/checkout/?edd_license_key=' . urlencode( $value ) . '&utm_campaign=admin&utm_source=licenses&utm_medium=renew'
+				);
+
+				$license_status = 'license-expires-soon-notice';
+
+			} else {
+
+				$messages[] = sprintf(
+					__( 'Your license key expires on %s.', 'rating-report' ),
+					date_i18n( get_option( 'date_format' ), strtotime( $license->expires, current_time( 'timestamp' ) ) )
+				);
+
+				$license_status = 'license-expiration-date-notice';
+
+			}
+
+		}
+
+	} else {
+		$license_status = null;
+	}
+
+	$size = ( isset( $args['size'] ) && ! is_null( $args['size'] ) ) ? $args['size'] : 'regular';
+
+	$wrapper_class = isset( $license_status ) ? $license_status : 'license-null';
+	?>
+	<div class="<?php echo sanitize_html_class( $wrapper_class ); ?>">
+		<input type="text" class="<?php echo sanitize_html_class( $size ); ?>-text" id="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" name="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" value="<?php echo esc_attr( $value ); ?>">
+		<?php
+
+		// License key is valid, so let's show a deactivate button.
+		if ( ( is_object( $license ) && 'valid' == $license->license ) || 'valid' == $license ) {
+			?>
+			<input type="submit" class="button-secondary" name="<?php echo esc_attr( $args['id'] ); ?>_deactivate" value="<?php _e( 'Deactivate License', 'rating-report' ); ?>">
+			<?php
+		}
+
+		?>
+		<label for="rating_report_settings[<?php echo rating_report_sanitize_key( $args['id'] ); ?>]" class="desc"><?php echo wp_kses_post( $args['desc'] ); ?></label>
+		<?php
+
+		if ( ! empty( $messages ) && is_array( $messages ) ) {
+			foreach ( $messages as $message ) {
+				?>
+				<div class="rating-report-license-data rating-report-license-<?php echo sanitize_html_class( $class ); ?> desc">
+					<p><?php echo $message; ?></p>
+				</div>
+				<?php
+			}
+		}
+
+		wp_nonce_field( rating_report_sanitize_key( $args['id'] ) . '-nonce', rating_report_sanitize_key( $args['id'] ) . '-nonce' );
+		?>
+	</div>
+	<?php
+}

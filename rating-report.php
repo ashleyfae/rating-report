@@ -72,6 +72,8 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 				add_action( 'plugins_loaded', array( self::$instance, 'load_textdomain' ) );
 
 				self::$instance->includes();
+
+				add_action( 'init', array( self::$instance, 'license' ) );
 			}
 
 			return self::$instance;
@@ -164,8 +166,25 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/meta-box.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/sanitize-meta-fields.php';
-				require_once RATING_REPORT_PLUGIN_DIR . 'includes/upgrades/upgrade-functions.php';
+				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
 			}
+
+		}
+
+		/**
+		 * Set Up License
+		 *
+		 * @access private
+		 * @since  2.0
+		 * @return void
+		 */
+		public function license() {
+
+			if ( ! class_exists( 'Rating_Report_License' ) ) {
+				require_once RATING_REPORT_PLUGIN_DIR . 'includes/updater/class-rating-report-license.php';
+			}
+
+			$license = new Rating_Report_License( __FILE__, 'Rating Report', RATING_REPORT_VERSION, 'Nose Graze' );
 
 		}
 

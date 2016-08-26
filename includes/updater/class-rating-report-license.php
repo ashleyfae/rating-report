@@ -157,7 +157,7 @@ class Rating_Report_License {
 			'main' => array(
 				$this->item_shortname . '_license_key' => array(
 					'id'      => $this->item_shortname . '_license_key',
-					'name'    => sprintf( __( '%s License Key', 'rating-report' ), $this->item_name ),
+					'name'    => sprintf( __( '%s License Key', 'rating-report' ), str_replace( ' Plugin', '', $this->item_name ) ),
 					'desc'    => '',
 					'type'    => 'license_key',
 					'options' => array(

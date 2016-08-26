@@ -85,5 +85,39 @@ x.0 Text Repeat
     width: 48%; }
     .rating-report-half.last {
       float: right; } }
+#rating-report-migrator-list {
+  list-style: disc;
+  padding-left: 2em; }
+
+.rating-report-migrator-progress {
+  background: #ddd;
+  margin-top: 25px;
+  height: 15px;
+  width: 100%; }
+  .rating-report-migrator-progress div {
+    height: 100%;
+    background: #5dcf67;
+    width: 0; }
+
+.admin-color-fresh .rating-report-migrator-progress div {
+  background: #0073aa; }
+
+.admin-color-light .rating-report-migrator-progress div {
+  background: #888; }
+
+.admin-color-blue .rating-report-migrator-progress div {
+  background: #096484; }
+
+.admin-color-coffee .rating-report-migrator-progress div {
+  background: #c7a589; }
+
+.admin-color-ectoplasm .rating-report-migrator-progress div {
+  background: #a3b745; }
+
+.admin-color-midnight .rating-report-migrator-progress div {
+  background: #e14d43; }
+
+.admin-color-sunrise .rating-report-migrator-progress div {
+  background: #dd823b; }
 
 /*# sourceMappingURL=rating-report-admin.css.map */

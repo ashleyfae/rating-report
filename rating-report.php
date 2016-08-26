@@ -165,6 +165,8 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/class-rr-notices.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/settings/display-settings.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/meta-box.php';
+				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/migrator/migrator.php';
+				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/migrator/class-migrator.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/sanitize-meta-fields.php';
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/admin/upgrades/upgrade-functions.php';
 			}

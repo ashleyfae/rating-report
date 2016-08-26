@@ -41,3 +41,4 @@ $wpdb->query( "DELETE FROM " . $postmeta_table . " WHERE meta_key = 'rating_repo
  */
 delete_option( 'rating_report_settings' );
 delete_option( 'rating_report_version' );
+delete_option( 'rating_report_upgraded_from_1' );

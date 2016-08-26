@@ -186,7 +186,7 @@ if ( ! class_exists( 'Rating_Report' ) ) :
 				require_once RATING_REPORT_PLUGIN_DIR . 'includes/updater/class-rating-report-license.php';
 			}
 
-			$license = new Rating_Report_License( __FILE__, 'Rating Report', RATING_REPORT_VERSION, 'Nose Graze' );
+			$license = new Rating_Report_License( __FILE__, 'Rating Report Plugin', RATING_REPORT_VERSION, 'Nose Graze' );
 
 		}
 

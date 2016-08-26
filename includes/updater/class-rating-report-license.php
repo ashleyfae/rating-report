@@ -198,7 +198,7 @@ class Rating_Report_License {
 			return;
 		}
 
-		if ( ! current_user_can( 'manage_rating_report_settings' ) ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 

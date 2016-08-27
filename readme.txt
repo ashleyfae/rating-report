@@ -16,9 +16,9 @@ Rating Report allows you to generate a rating report card based on different cri
 
 == Installation ==
 
-1. Upload `novelist` to the `/wp-content/plugins/` directory
+1. Upload `rating-report` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Adjust the settings in Books -> Settings
+1. Adjust the settings in Settings -> Rating Report
 
 == Frequently Asked Questions ==
 
@@ -32,5 +32,10 @@ TK
 
 == Changelog ==
 
-= 2.0 - 13 April 2016 =
+**2.0 - 26 August 2016**
+
+* Plugin completely recoded.
+
+**1.0 - 4 July 2013**
+
 * Initial release.

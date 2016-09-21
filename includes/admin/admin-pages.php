@@ -29,7 +29,7 @@ add_action( 'admin_menu', 'rating_report_add_options_link', 10 );
 /**
  * Is Admin Page
  *
- * Checks whether or not the current page is a Novelist admin page.
+ * Checks whether or not the current page is a Rating Report admin page.
  *
  * @since 2.0
  * @return bool

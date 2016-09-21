@@ -17,7 +17,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-// Include Novelist file.
+// Include Rating Report file.
 include_once 'rating-report.php';
 
 // Bail if they haven't opted to delete settings.
